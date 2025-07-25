@@ -1,0 +1,797 @@
+DROP SCHEMA IF EXISTS teampro;
+CREATE SCHEMA new_schema default character set utf8;
+use new_schema;
+
+CREATE TABLE employee (
+  emp_name varchar(5) NOT NULL,
+  emp_phone char(13) DEFAULT NULL,
+  PRIMARY KEY (emp_name)
+);
+
+insert into employee values ('박소현','010-8795-5858');
+insert into employee values ('김민아','010-4587-6325');
+insert into employee values ('이우식','010-2365-4544');
+insert into employee values ('최효진','010-5548-9898');
+
+
+CREATE TABLE doctor (
+  doc_name varchar(5) NOT NULL,
+  doc_email varchar(45) DEFAULT NULL,
+  emp_name varchar(5) DEFAULT NULL,
+  PRIMARY KEY (doc_name),
+  FOREIGN KEY (emp_name) REFERENCES employee (emp_name)
+);
+
+insert into doctor values ('준박','jp011@gmail.com','박소현');
+insert into doctor values ('이영아','LYA022@gmail.com','김민아');
+insert into doctor values ('전병운','JBY033@gmail.com','이우식');
+insert into doctor values ('이시영','LSY044@gmail.com','최효진');
+
+
+create table customer(
+cus_code int not null auto_increment,
+cus_name varchar(5),
+cus_sex char(1),
+cus_birth date,
+cus_phone char(13) unique,
+primary key(cus_code)
+);
+
+insert into customer values(1,'정효남','남','1977-6-26','010-5302-3922');
+insert into customer values(2,'권승수','여','1992-6-6','010-2287-7711');
+insert into customer values(3,'유기원','여','1998-6-9','010-2234-4900');
+insert into customer values(4,'손남지','남','2000-10-12','010-4601-5448');
+insert into customer values(5,'조하민','여','1996-8-21','010-9132-1655');
+insert into customer values(6,'오유선','남','2002-8-3','010-2587-5991');
+insert into customer values(7,'성하선','남','1984-6-13','010-3879-7146');
+insert into customer values(8,'최선빈','남','2001-11-9','010-5406-7725');
+insert into customer values(9,'전우식','여','1978-1-28','010-2098-4944');
+insert into customer values(10,'송준기','여','2003-4-25','010-3079-6110');
+insert into customer values(11,'사공영옥','남','1987-3-17','010-6703-2542');
+insert into customer values(12,'설홍일','남','2003-3-13','010-4074-5187');
+insert into customer values(13,'예병희','여','2000-11-14','010-9419-8440');
+insert into customer values(14,'양시은','여','1986-4-25','010-9419-1031');
+insert into customer values(15,'손도하','남','2002-10-17','010-1545-9982');
+insert into customer values(16,'예병하','남','1994-11-14','010-4490-7357');
+insert into customer values(17,'추지영','남','2001-1-19','010-5751-2416');
+insert into customer values(18,'백인혁','남','1977-12-14','010-1160-9954');
+insert into customer values(19,'정인혁','남','1986-5-8','010-3171-8780');
+insert into customer values(20,'윤형기','여','1999-1-24','010-3830-4682');
+insert into customer values(21,'윤재용','여','1979-7-5','010-3849-6709');
+insert into customer values(22,'윤연지','여','1987-12-7','010-3206-2371');
+insert into customer values(23,'최민환','남','1986-12-5','010-8968-8652');
+insert into customer values(24,'노시윤','여','1983-7-9','010-5724-4644');
+insert into customer values(25,'설주아','남','1983-3-5','010-3997-4288');
+insert into customer values(26,'허혜윤','여','1977-10-22','010-3227-4470');
+insert into customer values(27,'정지용','여','1979-12-3','010-6269-1088');
+insert into customer values(28,'황보기하','여','1993-1-14','010-5217-1479');
+insert into customer values(29,'남서희','여','1985-5-9','010-5168-7453');
+insert into customer values(30,'남지혁','남','2001-12-6','010-7357-8717');
+insert into customer values(31,'양성용','남','1982-8-2','010-6307-3873');
+insert into customer values(32,'이창원','남','1989-8-5','010-7919-1534');
+insert into customer values(33,'추진희','여','1996-5-8','010-4543-8717');
+insert into customer values(34,'설주희','여','1979-3-5','010-8948-8818');
+insert into customer values(35,'류재희','남','1981-5-16','010-3997-4644');
+insert into customer values(36,'한도현','남','1988-10-27','010-5723-3364');
+insert into customer values(37,'예영아','여','1989-12-27','010-7127-4860');
+insert into customer values(38,'복영기','남','1977-3-15','010-2622-6508');
+insert into customer values(39,'배윤빈','여','1995-10-11','010-8968-8384');
+insert into customer values(40,'신주미','남','1975-3-12','010-4345-3468');
+insert into customer values(41,'노세미','남','1988-3-1','010-5459-7533');
+insert into customer values(42,'성형민','여','1997-4-4','010-9176-6703');
+insert into customer values(43,'남유석','남','1982-3-22','010-6111-1456');
+insert into customer values(44,'이지용','여','1984-7-19','010-5459-4557');
+insert into customer values(45,'복시아','남','1993-6-7','010-3227-7386');
+insert into customer values(46,'배상화','남','1988-4-13','010-3849-5712');
+insert into customer values(47,'류광희','여','1994-6-14','010-6319-2371');
+insert into customer values(48,'장현자','여','1995-10-2','010-7440-3685');
+insert into customer values(49,'허연재','여','1992-3-4','010-7835-3997');
+insert into customer values(50,'풍주혁','남','1988-1-5','010-6110-9408');
+create table surgerytype(
+surgtype_ID char(1),
+surgtype varchar(5),
+primary key(surgtype_ID)
+);
+
+insert into surgerytype values ('A','성형수술');
+insert into surgerytype values ('B','약물시술');
+
+create table surgeryRoom(
+surg_room int,
+primary key(surg_room)
+);
+
+insert into surgeryRoom values ('1');
+insert into surgeryRoom values ('2');
+
+create table surgery(
+surg_name varchar(7),
+surg_price numeric,
+doc_name varchar(5),
+surgtype_ID char(1),
+primary key(surg_name),
+foreign key (surgtype_ID) references surgeryType(surgtype_ID),
+foreign key (doc_name) references doctor(doc_name)
+);
+
+
+insert into surgery values ('코수술','3000000','준박','A');
+insert into surgery values ('양악수술','12000000','이영아','A');
+insert into surgery values ('지방흡입','1700000','전병운','A');
+insert into surgery values ('눈수술','600000','이시영','A');
+insert into surgery values ('필러','300000','준박','B');
+insert into surgery values ('윤곽주사','80000','이영아','B');
+insert into surgery values ('보톡스','80000','전병운','B');
+insert into surgery values ('미백주사','20000','이시영','B');
+
+
+create table reservation_date(
+reserve_date date,
+primary key(reserve_date)
+);
+
+insert into reservation_date values ('2022-12-01');
+insert into reservation_date values ('2022-12-02');
+insert into reservation_date values ('2022-12-03');
+insert into reservation_date values ('2022-12-04');
+insert into reservation_date values ('2022-12-05');
+insert into reservation_date values ('2022-12-06');
+insert into reservation_date values ('2022-12-07');
+insert into reservation_date values ('2022-12-08');
+insert into reservation_date values ('2022-12-09');
+insert into reservation_date values ('2022-12-10');
+insert into reservation_date values ('2022-12-11');
+insert into reservation_date values ('2022-12-12');
+insert into reservation_date values ('2022-12-13');
+insert into reservation_date values ('2022-12-14');
+insert into reservation_date values ('2022-12-15');
+insert into reservation_date values ('2022-12-16');
+insert into reservation_date values ('2022-12-17');
+insert into reservation_date values ('2022-12-18');
+insert into reservation_date values ('2022-12-19');
+insert into reservation_date values ('2022-12-20');
+insert into reservation_date values ('2022-12-21');
+insert into reservation_date values ('2022-12-22');
+insert into reservation_date values ('2022-12-23');
+insert into reservation_date values ('2022-12-24');
+insert into reservation_date values ('2022-12-25');
+insert into reservation_date values ('2022-12-26');
+insert into reservation_date values ('2022-12-27');
+insert into reservation_date values ('2022-12-28');
+insert into reservation_date values ('2022-12-29');
+insert into reservation_date values ('2022-12-30');
+insert into reservation_date values ('2022-12-31');
+
+create table reservation_hour(
+reserve_hour varchar(11),
+primary key(reserve_hour)
+);
+
+insert into reservation_hour values ('09:00-10:00');
+insert into reservation_hour values ('10:00-11:00');
+insert into reservation_hour values ('11:00-12:00');
+insert into reservation_hour values ('12:00-13:00');
+insert into reservation_hour values ('13:00-14:00');
+insert into reservation_hour values ('14:00-15:00');
+insert into reservation_hour values ('15:00-16:00');
+insert into reservation_hour values ('16:00-17:00');
+insert into reservation_hour values ('17:00-18:00');
+
+
+create table reservation_history(
+reserve_code int not null auto_increment primary key,
+cus_code int,
+surg_name varchar(7),
+surg_room int,
+reserve_date date,
+reserve_hour varchar(11),
+foreign key (cus_code) references customer(cus_code),
+foreign key (surg_name) references surgery(surg_name),
+foreign key (surg_room) references surgeryRoom(surg_room),
+foreign key (reserve_date) references reservation_date(reserve_date),
+foreign key (reserve_hour) references reservation_hour(reserve_hour)
+);
+
+insert into reservation_history values(1,24,'미백주사',1,'2022-12-1','09:00-10:00');
+insert into reservation_history values(2,40,'코수술',2,'2022-12-1','09:00-10:00');
+insert into reservation_history values(3,38,'지방흡입',1,'2022-12-1','10:00-11:00');
+insert into reservation_history values(4,26,'눈수술',2,'2022-12-1','10:00-11:00');
+insert into reservation_history values(5,34,'코수술',1,'2022-12-1','11:00-12:00');
+insert into reservation_history values(6,18,'미백주사',2,'2022-12-1','11:00-12:00');
+insert into reservation_history values(7,3,'지방흡입',1,'2022-12-1','12:00-13:00');
+insert into reservation_history values(8,38,'양악수술',2,'2022-12-1','12:00-13:00');
+insert into reservation_history values(9,47,'눈수술',1,'2022-12-1','13:00-14:00');
+insert into reservation_history values(10,21,'윤곽주사',2,'2022-12-1','13:00-14:00');
+insert into reservation_history values(11,15,'필러',1,'2022-12-1','14:00-15:00');
+insert into reservation_history values(12,24,'코수술',2,'2022-12-1','14:00-15:00');
+insert into reservation_history values(13,11,'지방흡입',1,'2022-12-1','15:00-16:00');
+insert into reservation_history values(14,37,'보톡스',2,'2022-12-1','15:00-16:00');
+insert into reservation_history values(15,15,'필러',1,'2022-12-1','16:00-17:00');
+insert into reservation_history values(16,28,'코수술',2,'2022-12-1','16:00-17:00');
+insert into reservation_history values(17,12,'양악수술',1,'2022-12-1','17:00-18:00');
+insert into reservation_history values(18,42,'눈수술',2,'2022-12-1','17:00-18:00');
+insert into reservation_history values(19,46,'지방흡입',1,'2022-12-2','09:00-10:00');
+insert into reservation_history values(20,29,'양악수술',2,'2022-12-2','09:00-10:00');
+insert into reservation_history values(21,39,'필러',1,'2022-12-2','10:00-11:00');
+insert into reservation_history values(22,1,'윤곽주사',2,'2022-12-2','10:00-11:00');
+insert into reservation_history values(23,3,'미백주사',1,'2022-12-2','11:00-12:00');
+insert into reservation_history values(24,36,'필러',2,'2022-12-2','11:00-12:00');
+insert into reservation_history values(25,43,'눈수술',1,'2022-12-2','12:00-13:00');
+insert into reservation_history values(26,32,'미백주사',2,'2022-12-2','12:00-13:00');
+insert into reservation_history values(27,34,'필러',1,'2022-12-2','13:00-14:00');
+insert into reservation_history values(28,3,'양악수술',2,'2022-12-2','13:00-14:00');
+insert into reservation_history values(29,37,'미백주사',1,'2022-12-2','14:00-15:00');
+insert into reservation_history values(30,45,'필러',2,'2022-12-2','14:00-15:00');
+insert into reservation_history values(31,19,'윤곽주사',1,'2022-12-2','15:00-16:00');
+insert into reservation_history values(32,38,'눈수술',2,'2022-12-2','15:00-16:00');
+insert into reservation_history values(33,25,'양악수술',1,'2022-12-2','16:00-17:00');
+insert into reservation_history values(34,50,'필러',2,'2022-12-2','16:00-17:00');
+insert into reservation_history values(35,42,'미백주사',1,'2022-12-2','17:00-18:00');
+insert into reservation_history values(36,29,'양악수술',2,'2022-12-2','17:00-18:00');
+insert into reservation_history values(37,10,'코수술',1,'2022-12-3','09:00-10:00');
+insert into reservation_history values(38,38,'필러',2,'2022-12-3','09:00-10:00');
+insert into reservation_history values(39,23,'지방흡입',1,'2022-12-3','10:00-11:00');
+insert into reservation_history values(40,21,'코수술',2,'2022-12-3','10:00-11:00');
+insert into reservation_history values(41,8,'미백주사',1,'2022-12-3','11:00-12:00');
+insert into reservation_history values(42,23,'필러',2,'2022-12-3','11:00-12:00');
+insert into reservation_history values(43,12,'미백주사',1,'2022-12-3','12:00-13:00');
+insert into reservation_history values(44,3,'보톡스',2,'2022-12-3','12:00-13:00');
+insert into reservation_history values(45,28,'코수술',1,'2022-12-3','13:00-14:00');
+insert into reservation_history values(46,38,'필러',2,'2022-12-3','13:00-14:00');
+insert into reservation_history values(47,2,'윤곽주사',1,'2022-12-3','14:00-15:00');
+insert into reservation_history values(48,32,'미백주사',2,'2022-12-3','14:00-15:00');
+insert into reservation_history values(49,34,'필러',1,'2022-12-3','15:00-16:00');
+insert into reservation_history values(50,43,'양악수술',2,'2022-12-3','15:00-16:00');
+insert into reservation_history values(51,26,'보톡스',1,'2022-12-3','16:00-17:00');
+insert into reservation_history values(52,25,'지방흡입',2,'2022-12-3','16:00-17:00');
+insert into reservation_history values(53,23,'윤곽주사',1,'2022-12-3','17:00-18:00');
+insert into reservation_history values(54,6,'지방흡입',2,'2022-12-3','17:00-18:00');
+insert into reservation_history values(55,50,'미백주사',1,'2022-12-4','09:00-10:00');
+insert into reservation_history values(56,37,'윤곽주사',2,'2022-12-4','09:00-10:00');
+insert into reservation_history values(57,17,'필러',1,'2022-12-4','10:00-11:00');
+insert into reservation_history values(58,5,'코수술',2,'2022-12-4','10:00-11:00');
+insert into reservation_history values(59,14,'지방흡입',1,'2022-12-4','11:00-12:00');
+insert into reservation_history values(60,6,'눈수술',2,'2022-12-4','11:00-12:00');
+insert into reservation_history values(61,7,'윤곽주사',1,'2022-12-4','12:00-13:00');
+insert into reservation_history values(62,26,'코수술',2,'2022-12-4','12:00-13:00');
+insert into reservation_history values(63,34,'지방흡입',1,'2022-12-4','13:00-14:00');
+insert into reservation_history values(64,47,'필러',2,'2022-12-4','13:00-14:00');
+insert into reservation_history values(65,45,'눈수술',1,'2022-12-4','14:00-15:00');
+insert into reservation_history values(66,11,'미백주사',2,'2022-12-4','14:00-15:00');
+insert into reservation_history values(67,23,'코수술',1,'2022-12-4','15:00-16:00');
+insert into reservation_history values(68,47,'지방흡입',2,'2022-12-4','15:00-16:00');
+insert into reservation_history values(69,46,'코수술',1,'2022-12-4','16:00-17:00');
+insert into reservation_history values(70,43,'필러',2,'2022-12-4','16:00-17:00');
+insert into reservation_history values(71,3,'미백주사',1,'2022-12-4','17:00-18:00');
+insert into reservation_history values(72,37,'필러',2,'2022-12-4','17:00-18:00');
+insert into reservation_history values(73,32,'눈수술',1,'2022-12-5','09:00-10:00');
+insert into reservation_history values(74,30,'보톡스',2,'2022-12-5','09:00-10:00');
+insert into reservation_history values(75,35,'미백주사',1,'2022-12-5','10:00-11:00');
+insert into reservation_history values(76,16,'코수술',2,'2022-12-5','10:00-11:00');
+insert into reservation_history values(77,4,'필러',1,'2022-12-5','11:00-12:00');
+insert into reservation_history values(78,42,'양악수술',2,'2022-12-5','11:00-12:00');
+insert into reservation_history values(79,8,'미백주사',1,'2022-12-5','12:00-13:00');
+insert into reservation_history values(80,28,'필러',2,'2022-12-5','12:00-13:00');
+insert into reservation_history values(81,6,'미백주사',1,'2022-12-5','13:00-14:00');
+insert into reservation_history values(82,18,'코수술',2,'2022-12-5','13:00-14:00');
+insert into reservation_history values(83,38,'필러',1,'2022-12-5','14:00-15:00');
+insert into reservation_history values(84,30,'미백주사',2,'2022-12-5','14:00-15:00');
+insert into reservation_history values(85,2,'코수술',1,'2022-12-5','15:00-16:00');
+insert into reservation_history values(86,38,'미백주사',2,'2022-12-5','15:00-16:00');
+insert into reservation_history values(87,7,'양악수술',1,'2022-12-5','16:00-17:00');
+insert into reservation_history values(88,34,'필러',2,'2022-12-5','16:00-17:00');
+insert into reservation_history values(89,38,'눈수술',1,'2022-12-5','17:00-18:00');
+insert into reservation_history values(90,22,'미백주사',2,'2022-12-5','17:00-18:00');
+insert into reservation_history values(91,3,'눈수술',1,'2022-12-6','09:00-10:00');
+insert into reservation_history values(92,4,'필러',2,'2022-12-6','09:00-10:00');
+insert into reservation_history values(93,14,'미백주사',1,'2022-12-6','10:00-11:00');
+insert into reservation_history values(94,25,'양악수술',2,'2022-12-6','10:00-11:00');
+insert into reservation_history values(95,34,'윤곽주사',1,'2022-12-6','11:00-12:00');
+insert into reservation_history values(96,35,'눈수술',2,'2022-12-6','11:00-12:00');
+insert into reservation_history values(97,48,'미백주사',1,'2022-12-6','12:00-13:00');
+insert into reservation_history values(98,18,'눈수술',2,'2022-12-6','12:00-13:00');
+insert into reservation_history values(99,1,'양악수술',1,'2022-12-6','13:00-14:00');
+insert into reservation_history values(100,18,'미백주사',2,'2022-12-6','13:00-14:00');
+insert into reservation_history values(101,29,'눈수술',1,'2022-12-6','14:00-15:00');
+insert into reservation_history values(102,14,'코수술',2,'2022-12-6','14:00-15:00');
+insert into reservation_history values(103,35,'눈수술',1,'2022-12-6','15:00-16:00');
+insert into reservation_history values(104,19,'보톡스',2,'2022-12-6','15:00-16:00');
+insert into reservation_history values(105,1,'미백주사',1,'2022-12-6','16:00-17:00');
+insert into reservation_history values(106,37,'지방흡입',2,'2022-12-6','16:00-17:00');
+insert into reservation_history values(107,15,'양악수술',1,'2022-12-6','17:00-18:00');
+insert into reservation_history values(108,39,'지방흡입',2,'2022-12-6','17:00-18:00');
+insert into reservation_history values(109,47,'보톡스',1,'2022-12-7','09:00-10:00');
+insert into reservation_history values(110,48,'미백주사',2,'2022-12-7','09:00-10:00');
+insert into reservation_history values(111,50,'보톡스',1,'2022-12-7','10:00-11:00');
+insert into reservation_history values(112,32,'윤곽주사',2,'2022-12-7','10:00-11:00');
+insert into reservation_history values(113,7,'필러',1,'2022-12-7','11:00-12:00');
+insert into reservation_history values(114,15,'보톡스',2,'2022-12-7','11:00-12:00');
+insert into reservation_history values(115,13,'필러',1,'2022-12-7','12:00-13:00');
+insert into reservation_history values(116,46,'윤곽주사',2,'2022-12-7','12:00-13:00');
+insert into reservation_history values(117,21,'양악수술',1,'2022-12-7','13:00-14:00');
+insert into reservation_history values(118,49,'눈수술',2,'2022-12-7','13:00-14:00');
+insert into reservation_history values(119,6,'필러',1,'2022-12-7','14:00-15:00');
+insert into reservation_history values(120,41,'지방흡입',2,'2022-12-7','14:00-15:00');
+insert into reservation_history values(121,15,'필러',1,'2022-12-7','15:00-16:00');
+insert into reservation_history values(122,49,'지방흡입',2,'2022-12-7','15:00-16:00');
+insert into reservation_history values(123,45,'눈수술',1,'2022-12-7','16:00-17:00');
+insert into reservation_history values(124,42,'미백주사',2,'2022-12-7','16:00-17:00');
+insert into reservation_history values(125,10,'눈수술',1,'2022-12-7','17:00-18:00');
+insert into reservation_history values(126,40,'코수술',2,'2022-12-7','17:00-18:00');
+insert into reservation_history values(127,19,'보톡스',1,'2022-12-8','09:00-10:00');
+insert into reservation_history values(128,27,'지방흡입',2,'2022-12-8','09:00-10:00');
+insert into reservation_history values(129,44,'눈수술',1,'2022-12-8','10:00-11:00');
+insert into reservation_history values(130,42,'필러',2,'2022-12-8','10:00-11:00');
+insert into reservation_history values(131,18,'보톡스',1,'2022-12-8','11:00-12:00');
+insert into reservation_history values(132,30,'양악수술',2,'2022-12-8','11:00-12:00');
+insert into reservation_history values(133,9,'윤곽주사',1,'2022-12-8','12:00-13:00');
+insert into reservation_history values(134,39,'보톡스',2,'2022-12-8','12:00-13:00');
+insert into reservation_history values(135,48,'코수술',1,'2022-12-8','13:00-14:00');
+insert into reservation_history values(136,21,'필러',2,'2022-12-8','13:00-14:00');
+insert into reservation_history values(137,13,'보톡스',1,'2022-12-8','14:00-15:00');
+insert into reservation_history values(138,2,'윤곽주사',2,'2022-12-8','14:00-15:00');
+insert into reservation_history values(139,15,'미백주사',1,'2022-12-8','15:00-16:00');
+insert into reservation_history values(140,42,'양악수술',2,'2022-12-8','15:00-16:00');
+insert into reservation_history values(141,48,'눈수술',1,'2022-12-8','16:00-17:00');
+insert into reservation_history values(142,34,'코수술',2,'2022-12-8','16:00-17:00');
+insert into reservation_history values(143,4,'눈수술',1,'2022-12-8','17:00-18:00');
+insert into reservation_history values(144,31,'필러',2,'2022-12-8','17:00-18:00');
+insert into reservation_history values(145,2,'보톡스',1,'2022-12-9','09:00-10:00');
+insert into reservation_history values(146,11,'양악수술',2,'2022-12-9','09:00-10:00');
+insert into reservation_history values(147,10,'지방흡입',1,'2022-12-9','10:00-11:00');
+insert into reservation_history values(148,14,'윤곽주사',2,'2022-12-9','10:00-11:00');
+insert into reservation_history values(149,18,'지방흡입',1,'2022-12-9','11:00-12:00');
+insert into reservation_history values(150,19,'보톡스',2,'2022-12-9','11:00-12:00');
+insert into reservation_history values(151,17,'눈수술',1,'2022-12-9','12:00-13:00');
+insert into reservation_history values(152,15,'윤곽주사',2,'2022-12-9','12:00-13:00');
+insert into reservation_history values(153,35,'코수술',1,'2022-12-9','13:00-14:00');
+insert into reservation_history values(154,40,'미백주사',2,'2022-12-9','13:00-14:00');
+insert into reservation_history values(155,18,'윤곽주사',1,'2022-12-9','14:00-15:00');
+insert into reservation_history values(156,46,'코수술',2,'2022-12-9','14:00-15:00');
+insert into reservation_history values(157,3,'지방흡입',1,'2022-12-9','15:00-16:00');
+insert into reservation_history values(158,49,'미백주사',2,'2022-12-9','15:00-16:00');
+insert into reservation_history values(159,13,'지방흡입',1,'2022-12-9','16:00-17:00');
+insert into reservation_history values(160,50,'눈수술',2,'2022-12-9','16:00-17:00');
+insert into reservation_history values(161,15,'윤곽주사',1,'2022-12-9','17:00-18:00');
+insert into reservation_history values(162,8,'양악수술',2,'2022-12-9','17:00-18:00');
+insert into reservation_history values(163,33,'필러',1,'2022-12-10','09:00-10:00');
+insert into reservation_history values(164,1,'코수술',2,'2022-12-10','09:00-10:00');
+insert into reservation_history values(165,2,'보톡스',1,'2022-12-10','10:00-11:00');
+insert into reservation_history values(166,25,'지방흡입',2,'2022-12-10','10:00-11:00');
+insert into reservation_history values(167,37,'미백주사',1,'2022-12-10','11:00-12:00');
+insert into reservation_history values(168,12,'지방흡입',2,'2022-12-10','11:00-12:00');
+insert into reservation_history values(169,17,'코수술',1,'2022-12-10','12:00-13:00');
+insert into reservation_history values(170,26,'필러',2,'2022-12-10','12:00-13:00');
+insert into reservation_history values(171,8,'보톡스',1,'2022-12-10','13:00-14:00');
+insert into reservation_history values(172,37,'미백주사',2,'2022-12-10','13:00-14:00');
+insert into reservation_history values(173,13,'눈수술',1,'2022-12-10','14:00-15:00');
+insert into reservation_history values(174,50,'지방흡입',2,'2022-12-10','14:00-15:00');
+insert into reservation_history values(175,24,'보톡스',1,'2022-12-10','15:00-16:00');
+insert into reservation_history values(176,19,'코수술',2,'2022-12-10','15:00-16:00');
+insert into reservation_history values(177,44,'지방흡입',1,'2022-12-10','16:00-17:00');
+insert into reservation_history values(178,7,'코수술',2,'2022-12-10','16:00-17:00');
+insert into reservation_history values(179,22,'필러',1,'2022-12-10','17:00-18:00');
+insert into reservation_history values(180,17,'코수술',2,'2022-12-10','17:00-18:00');
+insert into reservation_history values(181,14,'양악수술',1,'2022-12-11','09:00-10:00');
+insert into reservation_history values(182,4,'코수술',2,'2022-12-11','09:00-10:00');
+insert into reservation_history values(183,8,'미백주사',1,'2022-12-11','10:00-11:00');
+insert into reservation_history values(184,35,'양악수술',2,'2022-12-11','10:00-11:00');
+insert into reservation_history values(185,17,'미백주사',1,'2022-12-11','11:00-12:00');
+insert into reservation_history values(186,28,'눈수술',2,'2022-12-11','11:00-12:00');
+insert into reservation_history values(187,19,'필러',1,'2022-12-11','12:00-13:00');
+insert into reservation_history values(188,14,'코수술',2,'2022-12-11','12:00-13:00');
+insert into reservation_history values(189,2,'양악수술',1,'2022-12-11','13:00-14:00');
+insert into reservation_history values(190,31,'미백주사',2,'2022-12-11','13:00-14:00');
+insert into reservation_history values(191,26,'보톡스',1,'2022-12-11','14:00-15:00');
+insert into reservation_history values(192,15,'미백주사',2,'2022-12-11','14:00-15:00');
+insert into reservation_history values(193,18,'코수술',1,'2022-12-11','15:00-16:00');
+insert into reservation_history values(194,10,'양악수술',2,'2022-12-11','15:00-16:00');
+insert into reservation_history values(195,50,'미백주사',1,'2022-12-11','16:00-17:00');
+insert into reservation_history values(196,23,'코수술',2,'2022-12-11','16:00-17:00');
+insert into reservation_history values(197,44,'코수술',2,'2022-12-11','17:00-18:00');
+insert into reservation_history values(198,14,'미백주사',1,'2022-12-12','09:00-10:00');
+insert into reservation_history values(199,1,'보톡스',2,'2022-12-12','09:00-10:00');
+insert into reservation_history values(200,8,'필러',1,'2022-12-12','10:00-11:00');
+insert into reservation_history values(201,19,'코수술',2,'2022-12-12','10:00-11:00');
+insert into reservation_history values(202,6,'보톡스',1,'2022-12-12','11:00-12:00');
+insert into reservation_history values(203,7,'미백주사',2,'2022-12-12','11:00-12:00');
+insert into reservation_history values(204,1,'양악수술',2,'2022-12-12','12:00-13:00');
+insert into reservation_history values(205,25,'윤곽주사',1,'2022-12-12','13:00-14:00');
+insert into reservation_history values(206,49,'양악수술',2,'2022-12-12','13:00-14:00');
+insert into reservation_history values(207,21,'지방흡입',1,'2022-12-12','14:00-15:00');
+insert into reservation_history values(208,8,'양악수술',2,'2022-12-12','14:00-15:00');
+insert into reservation_history values(209,19,'필러',1,'2022-12-12','15:00-16:00');
+insert into reservation_history values(210,18,'양악수술',1,'2022-12-12','16:00-17:00');
+insert into reservation_history values(211,32,'필러',2,'2022-12-12','16:00-17:00');
+insert into reservation_history values(212,30,'보톡스',1,'2022-12-12','17:00-18:00');
+insert into reservation_history values(213,49,'눈수술',2,'2022-12-12','17:00-18:00');
+insert into reservation_history values(214,22,'미백주사',1,'2022-12-13','09:00-10:00');
+insert into reservation_history values(215,31,'보톡스',1,'2022-12-13','10:00-11:00');
+insert into reservation_history values(216,49,'지방흡입',2,'2022-12-13','10:00-11:00');
+insert into reservation_history values(217,3,'필러',1,'2022-12-13','11:00-12:00');
+insert into reservation_history values(218,45,'지방흡입',2,'2022-12-13','11:00-12:00');
+insert into reservation_history values(219,35,'필러',1,'2022-12-13','12:00-13:00');
+insert into reservation_history values(220,45,'양악수술',2,'2022-12-13','12:00-13:00');
+insert into reservation_history values(221,11,'눈수술',1,'2022-12-13','13:00-14:00');
+insert into reservation_history values(222,25,'윤곽주사',2,'2022-12-13','13:00-14:00');
+insert into reservation_history values(223,37,'눈수술',1,'2022-12-13','14:00-15:00');
+insert into reservation_history values(224,12,'보톡스',2,'2022-12-13','14:00-15:00');
+insert into reservation_history values(225,18,'지방흡입',1,'2022-12-13','15:00-16:00');
+insert into reservation_history values(226,1,'윤곽주사',2,'2022-12-13','15:00-16:00');
+insert into reservation_history values(227,22,'필러',1,'2022-12-13','16:00-17:00');
+insert into reservation_history values(228,3,'코수술',2,'2022-12-13','16:00-17:00');
+insert into reservation_history values(229,15,'윤곽주사',2,'2022-12-13','17:00-18:00');
+insert into reservation_history values(230,46,'미백주사',1,'2022-12-14','09:00-10:00');
+insert into reservation_history values(231,21,'코수술',1,'2022-12-14','10:00-11:00');
+insert into reservation_history values(232,48,'눈수술',2,'2022-12-14','10:00-11:00');
+insert into reservation_history values(233,31,'양악수술',1,'2022-12-14','11:00-12:00');
+insert into reservation_history values(234,32,'지방흡입',1,'2022-12-14','12:00-13:00');
+insert into reservation_history values(235,13,'눈수술',2,'2022-12-14','12:00-13:00');
+insert into reservation_history values(236,25,'지방흡입',1,'2022-12-14','13:00-14:00');
+insert into reservation_history values(237,5,'눈수술',2,'2022-12-14','13:00-14:00');
+insert into reservation_history values(238,36,'미백주사',1,'2022-12-14','14:00-15:00');
+insert into reservation_history values(239,42,'보톡스',2,'2022-12-14','14:00-15:00');
+insert into reservation_history values(240,41,'양악수술',1,'2022-12-14','15:00-16:00');
+insert into reservation_history values(241,37,'미백주사',2,'2022-12-14','15:00-16:00');
+insert into reservation_history values(242,22,'눈수술',1,'2022-12-14','16:00-17:00');
+insert into reservation_history values(243,8,'윤곽주사',2,'2022-12-14','16:00-17:00');
+insert into reservation_history values(244,42,'코수술',1,'2022-12-14','17:00-18:00');
+insert into reservation_history values(245,9,'보톡스',2,'2022-12-14','17:00-18:00');
+insert into reservation_history values(246,46,'지방흡입',2,'2022-12-15','09:00-10:00');
+insert into reservation_history values(247,22,'코수술',1,'2022-12-15','10:00-11:00');
+insert into reservation_history values(248,13,'지방흡입',2,'2022-12-15','10:00-11:00');
+insert into reservation_history values(249,40,'지방흡입',2,'2022-12-15','11:00-12:00');
+insert into reservation_history values(250,26,'보톡스',1,'2022-12-15','12:00-13:00');
+insert into reservation_history values(251,27,'지방흡입',2,'2022-12-15','12:00-13:00');
+insert into reservation_history values(252,7,'코수술',1,'2022-12-15','13:00-14:00');
+insert into reservation_history values(253,50,'양악수술',2,'2022-12-15','13:00-14:00');
+insert into reservation_history values(254,48,'지방흡입',1,'2022-12-15','14:00-15:00');
+insert into reservation_history values(255,29,'필러',2,'2022-12-15','14:00-15:00');
+insert into reservation_history values(256,44,'눈수술',1,'2022-12-15','15:00-16:00');
+insert into reservation_history values(257,39,'윤곽주사',2,'2022-12-15','15:00-16:00');
+insert into reservation_history values(258,7,'필러',1,'2022-12-15','16:00-17:00');
+insert into reservation_history values(259,41,'눈수술',2,'2022-12-15','16:00-17:00');
+insert into reservation_history values(260,40,'지방흡입',2,'2022-12-15','17:00-18:00');
+insert into reservation_history values(261,4,'코수술',1,'2022-12-16','09:00-10:00');
+insert into reservation_history values(262,27,'미백주사',2,'2022-12-16','09:00-10:00');
+insert into reservation_history values(263,48,'눈수술',1,'2022-12-16','10:00-11:00');
+insert into reservation_history values(264,47,'보톡스',2,'2022-12-16','10:00-11:00');
+insert into reservation_history values(265,11,'눈수술',1,'2022-12-16','11:00-12:00');
+insert into reservation_history values(266,38,'보톡스',2,'2022-12-16','11:00-12:00');
+insert into reservation_history values(267,10,'필러',1,'2022-12-16','12:00-13:00');
+insert into reservation_history values(268,3,'지방흡입',2,'2022-12-16','12:00-13:00');
+insert into reservation_history values(269,18,'보톡스',1,'2022-12-16','13:00-14:00');
+insert into reservation_history values(270,44,'양악수술',2,'2022-12-16','13:00-14:00');
+insert into reservation_history values(271,12,'코수술',2,'2022-12-16','14:00-15:00');
+insert into reservation_history values(272,32,'양악수술',1,'2022-12-16','15:00-16:00');
+insert into reservation_history values(273,45,'눈수술',2,'2022-12-16','15:00-16:00');
+insert into reservation_history values(274,24,'미백주사',1,'2022-12-16','16:00-17:00');
+insert into reservation_history values(275,17,'보톡스',1,'2022-12-16','17:00-18:00');
+insert into reservation_history values(276,44,'양악수술',2,'2022-12-16','17:00-18:00');
+insert into reservation_history values(277,47,'미백주사',1,'2022-12-17','09:00-10:00');
+insert into reservation_history values(278,17,'보톡스',2,'2022-12-17','09:00-10:00');
+insert into reservation_history values(279,10,'지방흡입',1,'2022-12-17','10:00-11:00');
+insert into reservation_history values(280,6,'미백주사',1,'2022-12-17','11:00-12:00');
+insert into reservation_history values(281,16,'눈수술',2,'2022-12-17','11:00-12:00');
+insert into reservation_history values(282,33,'양악수술',1,'2022-12-17','12:00-13:00');
+insert into reservation_history values(283,3,'눈수술',2,'2022-12-17','12:00-13:00');
+insert into reservation_history values(284,40,'보톡스',1,'2022-12-17','13:00-14:00');
+insert into reservation_history values(285,22,'윤곽주사',2,'2022-12-17','13:00-14:00');
+insert into reservation_history values(286,20,'양악수술',1,'2022-12-17','14:00-15:00');
+insert into reservation_history values(287,25,'보톡스',2,'2022-12-17','14:00-15:00');
+insert into reservation_history values(288,40,'눈수술',1,'2022-12-17','15:00-16:00');
+insert into reservation_history values(289,22,'지방흡입',2,'2022-12-17','15:00-16:00');
+insert into reservation_history values(290,10,'눈수술',1,'2022-12-17','16:00-17:00');
+insert into reservation_history values(291,23,'보톡스',2,'2022-12-17','16:00-17:00');
+insert into reservation_history values(292,10,'필러',1,'2022-12-17','17:00-18:00');
+insert into reservation_history values(293,15,'양악수술',1,'2022-12-18','09:00-10:00');
+insert into reservation_history values(294,33,'코수술',2,'2022-12-18','09:00-10:00');
+insert into reservation_history values(295,4,'지방흡입',1,'2022-12-18','10:00-11:00');
+insert into reservation_history values(296,30,'필러',2,'2022-12-18','10:00-11:00');
+insert into reservation_history values(297,24,'코수술',1,'2022-12-18','11:00-12:00');
+insert into reservation_history values(298,14,'미백주사',2,'2022-12-18','11:00-12:00');
+insert into reservation_history values(299,1,'윤곽주사',1,'2022-12-18','12:00-13:00');
+insert into reservation_history values(300,39,'필러',2,'2022-12-18','12:00-13:00');
+insert into reservation_history values(301,11,'눈수술',2,'2022-12-18','13:00-14:00');
+insert into reservation_history values(302,49,'코수술',1,'2022-12-18','14:00-15:00');
+insert into reservation_history values(303,11,'미백주사',2,'2022-12-18','14:00-15:00');
+insert into reservation_history values(304,17,'코수술',1,'2022-12-18','15:00-16:00');
+insert into reservation_history values(305,16,'미백주사',2,'2022-12-18','15:00-16:00');
+insert into reservation_history values(306,38,'눈수술',1,'2022-12-18','16:00-17:00');
+insert into reservation_history values(307,44,'보톡스',2,'2022-12-18','16:00-17:00');
+insert into reservation_history values(308,24,'윤곽주사',1,'2022-12-18','17:00-18:00');
+insert into reservation_history values(309,47,'양악수술',2,'2022-12-18','17:00-18:00');
+insert into reservation_history values(310,49,'눈수술',2,'2022-12-19','09:00-10:00');
+insert into reservation_history values(311,41,'지방흡입',1,'2022-12-19','10:00-11:00');
+insert into reservation_history values(312,34,'필러',2,'2022-12-19','10:00-11:00');
+insert into reservation_history values(313,48,'윤곽주사',1,'2022-12-19','11:00-12:00');
+insert into reservation_history values(314,26,'지방흡입',2,'2022-12-19','11:00-12:00');
+insert into reservation_history values(315,12,'눈수술',1,'2022-12-19','12:00-13:00');
+insert into reservation_history values(316,26,'코수술',2,'2022-12-19','12:00-13:00');
+insert into reservation_history values(317,40,'양악수술',1,'2022-12-19','13:00-14:00');
+insert into reservation_history values(318,50,'필러',2,'2022-12-19','13:00-14:00');
+insert into reservation_history values(319,3,'코수술',2,'2022-12-19','14:00-15:00');
+insert into reservation_history values(320,37,'미백주사',1,'2022-12-19','15:00-16:00');
+insert into reservation_history values(321,28,'윤곽주사',2,'2022-12-19','15:00-16:00');
+insert into reservation_history values(322,3,'미백주사',1,'2022-12-19','16:00-17:00');
+insert into reservation_history values(323,20,'지방흡입',2,'2022-12-19','16:00-17:00');
+insert into reservation_history values(324,1,'눈수술',1,'2022-12-19','17:00-18:00');
+insert into reservation_history values(325,4,'필러',1,'2022-12-20','09:00-10:00');
+insert into reservation_history values(326,32,'윤곽주사',2,'2022-12-20','09:00-10:00');
+insert into reservation_history values(327,17,'코수술',1,'2022-12-20','10:00-11:00');
+insert into reservation_history values(328,35,'양악수술',2,'2022-12-20','10:00-11:00');
+insert into reservation_history values(329,47,'지방흡입',2,'2022-12-20','11:00-12:00');
+insert into reservation_history values(330,4,'코수술',1,'2022-12-20','12:00-13:00');
+insert into reservation_history values(331,32,'보톡스',2,'2022-12-20','12:00-13:00');
+insert into reservation_history values(332,10,'지방흡입',1,'2022-12-20','13:00-14:00');
+insert into reservation_history values(333,15,'윤곽주사',2,'2022-12-20','13:00-14:00');
+insert into reservation_history values(334,35,'미백주사',1,'2022-12-20','14:00-15:00');
+insert into reservation_history values(335,48,'윤곽주사',1,'2022-12-20','15:00-16:00');
+insert into reservation_history values(336,6,'지방흡입',2,'2022-12-20','15:00-16:00');
+insert into reservation_history values(337,2,'양악수술',1,'2022-12-20','16:00-17:00');
+insert into reservation_history values(338,4,'코수술',2,'2022-12-20','16:00-17:00');
+insert into reservation_history values(339,13,'보톡스',1,'2022-12-20','17:00-18:00');
+insert into reservation_history values(340,15,'윤곽주사',2,'2022-12-20','17:00-18:00');
+
+
+DELIMITER $$
+CREATE TRIGGER trigger_reservation
+AFTER INSERT ON customer
+FOR EACH ROW
+BEGIN
+declare cus_temp int;
+set cus_temp = new.cus_code;
+insert into reservation_history(cus_code) values(cus_temp);
+ 		
+        
+END$$
+DELIMITER ;
+
+
+
+create table reservation(
+select surg_room, concat(reserve_date,"    ", reserve_hour) as booking from reservation_date join reservation_hour join surgeryroom );
+
+select * from reservation
+order by surg_room;
+
+
+alter table reservation add column status varchar(5) default '예약가능';
+
+create table status
+select surg_room,concat(reserve_date,"    ", reserve_hour) as reservation
+from (select surg_room, reserve_date, reserve_hour
+        from reservation_history) aliasname
+order by reserve_date;
+        
+alter table status add column booked int default 1;
+
+
+create table booktable(
+select distinct reservation.surg_room, booking, status, booked 
+from reservation left join status on reservation.booking = status.reservation and reservation.surg_room = status.surg_room)
+order by booking;
+
+update booktable set status = case 
+when booked = 1 then '예약불가능'
+when booked is null then '예약가능'
+end;
+
+
+DELIMITER &&
+CREATE TRIGGER c_status
+AFTER update ON reservation_history
+FOR EACH ROW
+BEGIN
+declare s_r int; #surg_room
+declare r_d date; #date
+declare r_h varchar(15); #hour
+set s_r = new.surg_room;
+set r_d = new.reserve_date;
+set r_h = new.reserve_hour;
+
+insert into status(surg_room, reservation) values(s_r,concat(r_d,'    ',r_h));
+update booktable set booked = 1 where surg_room = s_r and booking = concat(r_d,'    ',r_h);
+update booktable set status = '예약불가능' where surg_room = s_r and booking = concat(r_d,'    ',r_h);
+
+END &&
+DELIMITER ;
+
+DELIMITER &&
+CREATE TRIGGER c_status2
+AFTER insert ON reservation_history
+FOR EACH ROW
+BEGIN
+declare s_r int; #surg_room
+declare r_d date; #date
+declare r_h varchar(15); #hour
+set s_r = new.surg_room;
+set r_d = new.reserve_date;
+set r_h = new.reserve_hour;
+
+insert into status(surg_room, reservation) values(s_r,concat(r_d,'    ',r_h));
+update booktable set booked = 1 where surg_room = s_r and booking = concat(r_d,'    ',r_h);
+update booktable set status = '예약불가능' where surg_room = s_r and booking = concat(r_d,'    ',r_h);
+
+END &&
+DELIMITER ;
+
+
+
+select * from booktable ;
+
+
+
+create table summary1(
+select reserve_date, surg_name, surg_price from reservation_date join surgery
+);
+ 
+alter table summary1 add column male int default 0;
+alter table summary1 add column female int default 0;
+alter table summary1 add column 20s int default 0;
+alter table summary1 add column 30s int default 0;
+alter table summary1 add column 40s int default 0;
+alter table summary1 add column total_amount int default 0;
+alter table summary1 add column total_price int default 0;
+update summary1 set male = 2, female = 0, 20s = 2, 30s = 0 , 40s = 0, total_amount = 2 where reserve_date = '2022-12-01' and surg_name = '필러';
+update summary1 set male = 1, female = 1, 20s = 0, 30s = 0 , 40s = 2, total_amount = 2 where reserve_date = '2022-12-01' and surg_name = '미백주사';
+update summary1 set male = 2, female = 1, 20s = 1, 30s = 1 , 40s = 1, total_amount = 3 where reserve_date = '2022-12-01' and surg_name = '지방흡입';
+update summary1 set male = 1, female = 3, 20s = 0, 30s = 1 , 40s = 3, total_amount = 4 where reserve_date = '2022-12-01' and surg_name = '코수술';
+update summary1 set male = 2, female = 0, 20s = 1, 30s = 0 , 40s = 1, total_amount = 2 where reserve_date = '2022-12-01' and surg_name = '양악수술';
+update summary1 set male = 0, female = 1, 20s = 0, 30s = 0 , 40s = 1, total_amount = 1 where reserve_date = '2022-12-01' and surg_name = '윤곽주사';
+update summary1 set male = 0, female = 1, 20s = 0, 30s = 1 , 40s = 0, total_amount = 1 where reserve_date = '2022-12-01' and surg_name = '보톡스';
+update summary1 set male = 0, female = 3, 20s = 2, 30s = 0 , 40s = 1, total_amount = 3 where reserve_date = '2022-12-01' and surg_name = '눈수술';
+
+update summary1 set 20s = 0, 30s = 1 , 40s = 0,  male = 1, female = 0, total_amount = 1 where reserve_date = '2022-12-02' and surg_name = '지방흡입';
+update summary1 set 20s = 1, 30s = 2 , 40s = 1,  male = 1, female = 3, total_amount = 4 where reserve_date = '2022-12-02' and surg_name = '양악수술';
+update summary1 set 20s = 1, 30s = 3 , 40s = 1,  male = 3, female = 2, total_amount = 5 where reserve_date = '2022-12-02' and surg_name = '필러';
+update summary1 set 20s = 0, 30s = 1 , 40s = 1,  male = 2, female = 0, total_amount = 2 where reserve_date = '2022-12-02' and surg_name = '윤곽주사';
+update summary1 set 20s = 2, 30s = 2 , 40s = 0,  male = 1, female = 4, total_amount = 4 where reserve_date = '2022-12-02' and surg_name = '미백주사';
+update summary1 set 20s = 0, 30s = 0 , 40s = 2,  male = 2, female = 0, total_amount = 2 where reserve_date = '2022-12-02' and surg_name = '눈수술';
+
+update summary1 set 20s = 1, 30s = 1 , 40s = 1,  male = 0, female = 3, total_amount = 3 where reserve_date = '2022-12-03' and surg_name = '코수술';
+update summary1 set 20s = 0, 30s = 1 , 40s = 3,  male = 3, female = 1, total_amount = 4 where reserve_date = '2022-12-03' and surg_name = '필러';
+update summary1 set 20s = 1, 30s = 1 , 40s = 1,  male = 3, female = 0, total_amount = 3 where reserve_date = '2022-12-03' and surg_name = '지방흡입';
+update summary1 set 20s = 2, 30s = 1 , 40s = 0,  male = 3, female = 0, total_amount = 3 where reserve_date = '2022-12-03' and surg_name = '미백주사';
+update summary1 set 20s = 1, 30s = 0 , 40s = 1,  male = 0, female = 2, total_amount = 2 where reserve_date = '2022-12-03' and surg_name = '보톡스';
+update summary1 set 20s = 0, 30s = 2 , 40s = 0,  male = 1, female = 1, total_amount = 1 where reserve_date = '2022-12-03' and surg_name = '윤곽주사';
+update summary1 set 20s = 0, 30s = 0 , 40s = 1,  male = 1, female = 0, total_amount = 1 where reserve_date = '2022-12-03' and surg_name = '양악수술';
+
+update summary1 set 20s = 1, 30s = 2 , 40s = 0,  male = 2, female = 1, total_amount = 3 where reserve_date = '2022-12-04' and surg_name = '미백주사';
+update summary1 set 20s = 0, 30s = 2 , 40s = 0,  male = 1, female = 1, total_amount = 2 where reserve_date = '2022-12-04' and surg_name = '윤곽주사';
+update summary1 set 20s = 2, 30s = 1 , 40s = 1,  male = 2, female = 2, total_amount = 4 where reserve_date = '2022-12-04' and surg_name = '필러';
+update summary1 set 20s = 1, 30s = 2 , 40s = 1,  male = 2, female = 2, total_amount = 4 where reserve_date = '2022-12-04' and surg_name = '코수술';
+update summary1 set 20s = 1, 30s = 1 , 40s = 1,  male = 0, female = 3, total_amount = 3 where reserve_date = '2022-12-04' and surg_name = '지방흡입';
+update summary1 set 20s = 1, 30s = 1 , 40s = 0,  male = 2, female = 0, total_amount = 2 where reserve_date = '2022-12-04' and surg_name = '눈수술';
+
+update summary1 set 20s = 0, 30s = 1 , 40s = 1,  male = 2, female = 0, total_amount = 2 where reserve_date = '2022-12-05' and surg_name = '눈수술';
+update summary1 set 20s = 1, 30s = 0 , 40s = 0,  male = 1, female = 0, total_amount = 1 where reserve_date = '2022-12-05' and surg_name = '보톡스';
+update summary1 set 20s = 3, 30s = 1 , 40s = 2,  male = 5, female = 1, total_amount = 6 where reserve_date = '2022-12-05' and surg_name = '미백주사';
+update summary1 set 20s = 1, 30s = 1 , 40s = 1,  male = 2, female = 1, total_amount = 3 where reserve_date = '2022-12-05' and surg_name = '코수술';
+update summary1 set 20s = 1, 30s = 1 , 40s = 2,  male = 2, female = 2, total_amount = 4 where reserve_date = '2022-12-05' and surg_name = '필러';
+update summary1 set 20s = 1, 30s = 1 , 40s = 0,  male = 1, female = 1, total_amount = 2 where reserve_date = '2022-12-05' and surg_name = '양악수술';
+
+update summary1 set 20s = 1, 30s = 1 , 40s = 3,  male = 3, female = 2, total_amount = 5 where reserve_date = '2022-12-06' and surg_name = '눈수술';
+update summary1 set 20s = 1, 30s = 0 , 40s = 0,  male = 1, female = 0, total_amount = 1 where reserve_date = '2022-12-06' and surg_name = '필러';
+update summary1 set 20s = 1, 30s = 1 , 40s = 2,  male = 2, female = 2, total_amount = 4 where reserve_date = '2022-12-06' and surg_name = '미백주사';
+update summary1 set 20s = 1, 30s = 0 , 40s = 2,  male = 3, female = 0, total_amount = 3 where reserve_date = '2022-12-06' and surg_name = '양악수술';
+update summary1 set 20s = 0, 30s = 0 , 40s = 1,  male = 0, female = 1, total_amount = 1 where reserve_date = '2022-12-06' and surg_name = '윤곽주사';
+update summary1 set 20s = 0, 30s = 2 , 40s = 0,  male = 0, female = 1, total_amount = 1 where reserve_date = '2022-12-06' and surg_name = '코수술';
+update summary1 set 20s = 0, 30s = 1 , 40s = 0,  male = 1, female = 0, total_amount = 1 where reserve_date = '2022-12-06' and surg_name = '보톡스';
+update summary1 set 20s = 1, 30s = 1 , 40s = 0,  male = 0, female = 2, total_amount = 2 where reserve_date = '2022-12-06' and surg_name = '지방흡입';
+
+update summary1 set 20s = 2, 30s = 1 , 40s = 0,  male = 2, female = 1, total_amount = 3 where reserve_date = '2022-12-07' and surg_name = '보톡스';
+update summary1 set 20s = 2, 30s = 0 , 40s = 0,  male = 0, female = 2, total_amount = 2 where reserve_date = '2022-12-07' and surg_name = '미백주사';
+update summary1 set 20s = 0, 30s = 2 , 40s = 0,  male = 2, female = 0, total_amount = 2 where reserve_date = '2022-12-07' and surg_name = '윤곽주사';
+update summary1 set 20s = 3, 30s = 1 , 40s = 0,  male = 3, female = 1, total_amount = 4 where reserve_date = '2022-12-07' and surg_name = '필러';
+update summary1 set 20s = 0, 30s = 0 , 40s = 1,  male = 0, female = 1, total_amount = 1 where reserve_date = '2022-12-07' and surg_name = '양악수술';
+update summary1 set 20s = 1, 30s = 2 , 40s = 0,  male = 1, female = 2, total_amount = 3 where reserve_date = '2022-12-07' and surg_name = '눈수술';
+update summary1 set 20s = 0, 30s = 2 , 40s = 0,  male = 1, female = 1, total_amount = 2 where reserve_date = '2022-12-07' and surg_name = '지방흡입';
+update summary1 set 20s = 0, 30s = 0 , 40s = 1,  male = 1, female = 0, total_amount = 1 where reserve_date = '2022-12-07' and surg_name = '코수술';
+
+update summary1 set 20s = 2, 30s = 1 , 40s = 1,  male = 2, female = 2, total_amount = 4 where reserve_date = '2022-12-08' and surg_name = '보톡스';
+update summary1 set 20s = 0, 30s = 0 , 40s = 1,  male = 0, female = 1, total_amount = 1 where reserve_date = '2022-12-08' and surg_name = '지방흡입';
+update summary1 set 20s = 2, 30s = 1 , 40s = 0,  male = 1, female = 2, total_amount = 3 where reserve_date = '2022-12-08' and surg_name = '눈수술';
+update summary1 set 20s = 1, 30s = 0 , 40s = 2,  male = 1, female = 2, total_amount = 3 where reserve_date = '2022-12-08' and surg_name = '필러';
+update summary1 set 20s = 2, 30s = 0 , 40s = 0,  male = 1, female = 1, total_amount = 2 where reserve_date = '2022-12-08' and surg_name = '양악수술';
+update summary1 set 20s = 0, 30s = 1 , 40s = 1,  male = 0, female = 2, total_amount = 2 where reserve_date = '2022-12-08' and surg_name = '윤곽주사';
+update summary1 set 20s = 1, 30s = 0, 40s =  1,  male = 0, female = 2, total_amount = 2 where reserve_date = '2022-12-08' and surg_name = '코수술';
+update summary1 set 20s = 1, 30s = 0 , 40s = 0,  male = 1, female = 0, total_amount = 1 where reserve_date = '2022-12-08' and surg_name = '미백주사';
+
+update summary1 set 20s = 0, 30s = 2 , 40s = 0,  male = 1, female = 1, total_amount = 2 where reserve_date = '2022-12-09' and surg_name = '보톡스';
+update summary1 set 20s = 1, 30s = 1 , 40s = 0,  male = 2, female = 0, total_amount = 2 where reserve_date = '2022-12-09' and surg_name = '양악수술';
+update summary1 set 20s = 3, 30s = 0 , 40s = 1,  male = 1, female = 3, total_amount = 4 where reserve_date = '2022-12-09' and surg_name = '지방흡입';
+update summary1 set 20s = 2, 30s = 1 , 40s = 1,  male = 3, female = 1, total_amount = 4 where reserve_date = '2022-12-09' and surg_name = '윤곽주사';
+update summary1 set 20s = 1, 30s = 1 , 40s = 0,  male = 2, female = 0, total_amount = 2 where reserve_date = '2022-12-09' and surg_name = '눈수술';
+update summary1 set 20s = 0, 30s = 1 , 40s = 1,  male = 2, female = 0, total_amount = 2 where reserve_date = '2022-12-09' and surg_name = '코수술';
+update summary1 set 20s = 0, 30s = 1 , 40s = 1,  male = 1, female = 1, total_amount = 2 where reserve_date = '2022-12-09' and surg_name = '미백주사';
+
+update summary1 set 20s = 1, 30s = 1 , 40s = 1,  male = 0, female = 3, total_amount = 3 where reserve_date = '2022-12-10' and surg_name = '필러';
+update summary1 set 20s = 2, 30s = 2 , 40s = 1,  male = 5, female = 0, total_amount = 5 where reserve_date = '2022-12-10' and surg_name = '코수술';
+update summary1 set 20s = 1, 30s = 1 , 40s = 1,  male = 1, female = 2, total_amount = 3 where reserve_date = '2022-12-10' and surg_name = '보톡스';
+update summary1 set 20s = 1, 30s = 2 , 40s = 1,  male = 3, female = 1, total_amount = 4 where reserve_date = '2022-12-10' and surg_name = '지방흡입';
+update summary1 set 20s = 0, 30s = 2 , 40s = 0,  male = 0, female = 2, total_amount = 2 where reserve_date = '2022-12-10' and surg_name = '미백주사';
+update summary1 set 20s = 1, 30s = 0 , 40s = 1,  male = 0, female = 1, total_amount = 1 where reserve_date = '2022-12-10' and surg_name = '눈수술';
+
+update summary1 set 20s = 1, 30s = 2 , 40s = 1,  male = 1, female = 3, total_amount = 4 where reserve_date = '2022-12-11' and surg_name = '양악수술';
+update summary1 set 20s = 1, 30s = 3 , 40s = 1,  male = 3, female = 2, total_amount = 5 where reserve_date = '2022-12-11' and surg_name = '코수술';
+update summary1 set 20s = 3, 30s = 1 , 40s = 1,  male = 5, female = 0, total_amount = 5 where reserve_date = '2022-12-11' and surg_name = '미백주사';
+update summary1 set 20s = 0, 30s = 1 , 40s = 0,  male = 0, female = 1, total_amount = 1 where reserve_date = '2022-12-11' and surg_name = '눈수술';
+update summary1 set 20s = 0, 30s = 1 , 40s = 0,  male = 1, female = 0, total_amount = 1 where reserve_date = '2022-12-11' and surg_name = '필러';
+update summary1 set 20s = 0, 30s = 0 , 40s = 1,  male = 0, female = 1, total_amount = 1 where reserve_date = '2022-12-11' and surg_name = '보톡스';
+
+update summary1 set 20s = 0, 30s = 2 , 40s = 0,  male = 1, female = 1, total_amount = 2 where reserve_date = '2022-12-12' and surg_name = '미백주사';
+update summary1 set 20s = 2, 30s = 0 , 40s = 1,  male = 3, female = 0, total_amount = 3 where reserve_date = '2022-12-12' and surg_name = '보톡스';
+update summary1 set 20s = 1, 30s = 2 , 40s = 0,  male = 3, female = 0, total_amount = 3 where reserve_date = '2022-12-12' and surg_name = '필러';
+update summary1 set 20s = 0, 30s = 1 , 40s = 0,  male = 1, female = 0, total_amount = 1 where reserve_date = '2022-12-12' and surg_name = '코수술';
+update summary1 set 20s = 1, 30s = 1 , 40s = 2,  male = 3, female = 1, total_amount = 4 where reserve_date = '2022-12-12' and surg_name = '양악수술';
+update summary1 set 20s = 0, 30s = 0 , 40s = 1,  male = 1, female = 0, total_amount = 1 where reserve_date = '2022-12-12' and surg_name = '윤곽주사';
+update summary1 set 20s = 0, 30s = 0 , 40s = 1,  male = 0, female = 1, total_amount = 1 where reserve_date = '2022-12-12' and surg_name = '지방흡입';
+update summary1 set 20s = 0, 30s = 1 , 40s = 0,  male = 0, female = 1, total_amount = 1 where reserve_date = '2022-12-12' and surg_name = '눈수술';
+
+update summary1 set 20s = 0, 30s = 1 , 40s = 0,  male = 0, female = 1, total_amount = 1 where reserve_date = '2022-12-13' and surg_name = '미백주사';
+update summary1 set 20s = 1, 30s = 0 , 40s = 1,  male = 2, female = 0, total_amount = 2 where reserve_date = '2022-12-13' and surg_name = '보톡스';
+update summary1 set 20s = 0, 30s = 2 , 40s = 1,  male = 2, female = 1, total_amount = 3 where reserve_date = '2022-12-13' and surg_name = '지방흡입';
+update summary1 set 20s = 1, 30s = 1 , 40s = 1,  male = 1, female = 2, total_amount = 3 where reserve_date = '2022-12-13' and surg_name = '필러';
+update summary1 set 20s = 0, 30s = 1 , 40s = 0,  male = 1, female = 0, total_amount = 1 where reserve_date = '2022-12-13' and surg_name = '양악수술';
+update summary1 set 20s = 0, 30s = 2 , 40s = 0,  male = 1, female = 1, total_amount = 2 where reserve_date = '2022-12-13' and surg_name = '눈수술';
+update summary1 set 20s = 1, 30s = 0 , 40s = 2,  male = 3, female = 0, total_amount = 3 where reserve_date = '2022-12-13' and surg_name = '윤곽주사';
+update summary1 set 20s = 1, 30s = 0 , 40s = 0,  male = 0, female = 1, total_amount = 1 where reserve_date = '2022-12-13' and surg_name = '코수술';
+
+update summary1 set 20s = 0, 30s = 3 , 40s = 0,  male = 2, female = 1, total_amount = 3 where reserve_date = '2022-12-14' and surg_name = '미백주사';
+update summary1 set 20s = 1, 30s = 0 , 40s = 1,  male = 0, female = 2, total_amount = 2 where reserve_date = '2022-12-14' and surg_name = '코수술';
+update summary1 set 20s = 3, 30s = 1 , 40s = 0,  male = 0, female = 4, total_amount = 4 where reserve_date = '2022-12-14' and surg_name = '눈수술';
+update summary1 set 20s = 0, 30s = 1 , 40s = 1,  male = 2, female = 0, total_amount = 2 where reserve_date = '2022-12-14' and surg_name = '양악수술';
+update summary1 set 20s = 0, 30s = 1 , 40s = 1,  male = 2, female = 0, total_amount = 2 where reserve_date = '2022-12-14' and surg_name = '지방흡입';
+update summary1 set 20s = 1, 30s = 0 , 40s = 1,  male = 0, female = 2, total_amount = 2 where reserve_date = '2022-12-14' and surg_name = '보톡스';
+update summary1 set 20s = 1, 30s = 0 , 40s = 0,  male = 1, female = 0, total_amount = 1 where reserve_date = '2022-12-14' and surg_name = '윤곽주사';
+
+update summary1 set 20s = 2, 30s = 1 , 40s = 3,  male =3, female = 3, total_amount = 6 where reserve_date = '2022-12-15' and surg_name = '지방흡입';
+update summary1 set 20s = 0, 30s = 2 , 40s = 0,  male =1, female = 1, total_amount = 2 where reserve_date = '2022-12-15' and surg_name = '코수술';
+update summary1 set 20s = 0, 30s = 0 , 40s = 1,  male =0, female = 1, total_amount = 1 where reserve_date = '2022-12-15' and surg_name = '보톡스';
+update summary1 set 20s = 0, 30s = 1 , 40s = 0,  male =1, female = 0, total_amount = 1 where reserve_date = '2022-12-15' and surg_name = '양악수술';
+update summary1 set 20s = 0, 30s = 2 , 40s = 0,  male =1, female = 1, total_amount = 2 where reserve_date = '2022-12-15' and surg_name = '필러';
+update summary1 set 20s = 0, 30s = 2 , 40s = 0,  male =1, female = 1, total_amount = 2 where reserve_date = '2022-12-15' and surg_name = '눈수술';
+update summary1 set 20s = 1, 30s = 0 , 40s = 0,  male =0, female = 1, total_amount = 1 where reserve_date = '2022-12-15' and surg_name = '윤곽주사';
+
+update summary1 set 20s = 2, 30s = 0 , 40s = 2,  male = 3, female = 1, total_amount = 4 where reserve_date = '2022-12-16' and surg_name = '보톡스';
+update summary1 set 20s = 0, 30s = 3 , 40s = 0,  male = 1, female = 2, total_amount = 3 where reserve_date = '2022-12-16' and surg_name = '양악수술';
+update summary1 set 20s = 1, 30s = 0 , 40s = 0,  male = 0, female = 1, total_amount = 1 where reserve_date = '2022-12-16' and surg_name = '지방흡입';
+update summary1 set 20s = 1, 30s = 2 , 40s = 0,  male = 2, female = 1, total_amount = 3 where reserve_date = '2022-12-16' and surg_name = '눈수술';
+update summary1 set 20s = 2, 30s = 0 , 40s = 0,  male = 2, female = 0, total_amount = 2 where reserve_date = '2022-12-16' and surg_name = '코수술';
+update summary1 set 20s = 0, 30s = 0 , 40s = 2,  male = 0, female = 2, total_amount = 2 where reserve_date = '2022-12-16' and surg_name = '미백주사';
+
+update summary1 set 20s = 1, 30s = 1 , 40s = 2,  male = 4, female = 0, total_amount = 4 where reserve_date = '2022-12-17' and surg_name = '보톡스';
+update summary1 set 20s = 2, 30s = 0 , 40s = 0,  male = 0, female = 2, total_amount = 2 where reserve_date = '2022-12-17' and surg_name = '양악수술';
+update summary1 set 20s = 1, 30s = 1 , 40s = 0,  male = 0, female = 2, total_amount = 0 where reserve_date = '2022-12-17' and surg_name = '지방흡입';
+update summary1 set 20s = 0, 30s = 1 , 40s = 0,  male = 0, female = 1, total_amount = 0 where reserve_date = '2022-12-17' and surg_name = '윤곽주사';
+update summary1 set 20s = 3, 30s = 0 , 40s = 1,  male = 2, female = 2, total_amount = 4 where reserve_date = '2022-12-17' and surg_name = '눈수술';
+update summary1 set 20s = 2, 30s = 0 , 40s = 0,  male = 1, female = 1, total_amount = 2 where reserve_date = '2022-12-17' and surg_name = '미백주사';
+
+
+update summary1 set 20s = 2, 30s = 0 , 40s = 0,  male = 1, female = 1, total_amount = 2 where reserve_date = '2022-12-18' and surg_name = '양악수술';
+update summary1 set 20s = 2, 30s = 1 , 40s = 1,  male = 1, female = 3, total_amount = 4 where reserve_date = '2022-12-18' and surg_name = '코수술';
+update summary1 set 20s = 1, 30s = 0 , 40s = 0,  male = 1, female = 0, total_amount = 1 where reserve_date = '2022-12-18' and surg_name = '지방흡입';
+update summary1 set 20s = 2, 30s = 0 , 40s = 0,  male = 1, female = 1, total_amount = 2 where reserve_date = '2022-12-18' and surg_name = '필러';
+update summary1 set 20s = 1, 30s = 2 , 40s = 0,  male = 2, female = 1, total_amount = 3 where reserve_date = '2022-12-18' and surg_name = '미백주사';
+update summary1 set 20s = 0, 30s = 0 , 40s = 2,  male = 1, female = 1, total_amount = 2 where reserve_date = '2022-12-18' and surg_name = '윤곽주사';
+update summary1 set 20s = 0, 30s = 1 , 40s = 1,  male = 2, female = 0, total_amount = 2 where reserve_date = '2022-12-18' and surg_name = '눈수술';
+update summary1 set 20s = 0, 30s = 1 , 40s = 0,  male = 0, female = 1, total_amount = 1 where reserve_date = '2022-12-18' and surg_name = '보톡스';
+
+update summary1 set 20s = 1, 30s = 1 , 40s = 1,  male = 2, female = 1, total_amount = 3 where reserve_date = '2022-12-19' and surg_name = '눈수술';
+update summary1 set 20s = 1, 30s = 1 , 40s = 1,  male = 1, female = 2, total_amount = 3 where reserve_date = '2022-12-19' and surg_name = '지방흡입';
+update summary1 set 20s = 0, 30s = 1 , 40s = 1,  male = 1, female = 1, total_amount = 2 where reserve_date = '2022-12-19' and surg_name = '필러';
+update summary1 set 20s = 1, 30s = 1 , 40s = 0,  male = 0, female = 2, total_amount = 2 where reserve_date = '2022-12-19' and surg_name = '윤곽주사';
+update summary1 set 20s = 1, 30s = 0 , 40s = 1,  male = 0, female = 2, total_amount = 2 where reserve_date = '2022-12-19' and surg_name = '코수술';
+update summary1 set 20s = 0, 30s = 0 , 40s = 1,  male = 1, female = 0, total_amount = 1 where reserve_date = '2022-12-19' and surg_name = '양악수술';
+update summary1 set 20s = 1, 30s = 1 , 40s = 0,  male = 0, female = 2, total_amount = 2 where reserve_date = '2022-12-19' and surg_name = '미백주사';
+
+update summary1 set 20s = 1, 30s = 0 , 40s = 0,  male = 1, female = 0, total_amount = 1 where reserve_date = '2022-12-20' and surg_name = '필러';
+update summary1 set 20s = 3, 30s = 1 , 40s = 0,  male = 3, female = 1, total_amount = 4 where reserve_date = '2022-12-20' and surg_name = '윤곽주사';
+update summary1 set 20s = 3, 30s = 0 , 40s = 0,  male = 3, female = 0, total_amount = 3 where reserve_date = '2022-12-20' and surg_name = '코수술';
+update summary1 set 20s = 0, 30s = 1 , 40s = 1,  male = 1, female = 1, total_amount = 2 where reserve_date = '2022-12-20' and surg_name = '양악수술';
+update summary1 set 20s = 3, 30s = 0 , 40s = 0,  male = 1, female = 2, total_amount = 3 where reserve_date = '2022-12-20' and surg_name = '지방흡입';
+update summary1 set 20s = 1, 30s = 1 , 40s = 0,  male = 1, female = 1, total_amount = 2 where reserve_date = '2022-12-20' and surg_name = '보톡스';
+update summary1 set 20s = 0, 30s = 0 , 40s = 1,  male = 1, female = 0, total_amount = 1 where reserve_date = '2022-12-20' and surg_name = '미백주사';
+
+update summary1 set total_price = surg_price*total_amount;

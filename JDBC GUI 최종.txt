@@ -1,0 +1,1435 @@
+package teampro;
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import java.awt.Font;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.DefaultComboBoxModel;
+import com.mysql.cj.jdbc.result.ResultSetMetaData;
+import com.toedter.calendar.JDateChooser;
+import net.proteanit.sql.DbUtils;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Vector;
+import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import java.sql.*;
+import java.awt.EventQueue;
+import net.proteanit.sql.DbUtils;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import java.awt.Font;
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.JButton;
+import java.awt.Color;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+
+public class Final {
+
+   private JFrame frame;
+   private JTextField txtcode;
+   private JTable table;
+   private JComboBox txtdate;
+   private JComboBox txtdate_1;
+   private JComboBox txthour;
+   private JComboBox txthour_1;
+   private JComboBox combeforedate;
+   private JComboBox comafterdate;
+   private JComboBox comsurgery;
+   private JTextField txtsum;
+   
+   private JDateChooser txtdchooser;
+
+
+   private JTextField txtcus_code;
+   private JTextField txtcus_name;
+   private JTextField txtcus_sex;
+   private JTextField txtcus_birth;
+   private JTextField txtcus_phone;
+   private JTable table_3;
+   private JTable table_1;
+   private JTable table_2;
+   private JTable table_4;
+   private JComboBox txtCODE;
+   private JComboBox txtCODE_1;
+   private JTextField txtmale;
+   private JTextField txtfemale;
+   private JTextField txt20;
+   private JTextField txt30;
+   private JTextField txt40;;
+   private JTextField txttotal;
+   private JTextField txteye;
+   private JTextField txtnose;
+   private JTextField txtchin;
+   private JTextField txtfat;
+   private JTextField txtfiller;
+   private JTextField txtboto;
+   private JTextField txtwhite;
+   private JTextField txtout;
+   private JTextField txteyecount;
+   private JTextField txtnosecount;
+   private JTextField txtchincount;
+   private JTextField txtfatcount;
+   private JTextField txtfillercount;
+   private JTextField txtbotocount;
+   private JTextField txtwhitecount;
+   private JTextField txtoutcount;
+   
+   
+
+
+   /**
+    * Launch the application.
+    */
+   public static void main(String[] args) {
+      EventQueue.invokeLater(new Runnable() {
+         public void run() {
+            try {
+               Final window = new Final ();
+               window.frame.setVisible(true);
+            } catch (Exception e) {
+               e.printStackTrace();
+            }
+         }
+      });
+   }
+
+   /**
+    * Create the application.
+    */
+   public Final() {
+      initialize();
+      Connect();
+      table_load();
+      table_load_3();
+       table_load_1();
+       table_load_4();
+       LoadCode();
+       LoadCode_1();
+       LoadCode_2();
+       LoadCode_3();
+       LoadCode_22();
+       LoadCode_33();
+
+
+   }
+   Connection con;
+   PreparedStatement pst;
+   ResultSet rs;
+   
+   
+   
+   public void Connect()
+       {
+           try {
+               Class.forName("com.mysql.jdbc.Driver");
+               con = DriverManager.getConnection("jdbc:mysql://localhost:3306/teampro","root","1234");
+           }
+           catch (ClassNotFoundException ex)
+           {
+             ex.printStackTrace();
+           }
+           catch (SQLException ex)
+           {
+               ex.printStackTrace();
+           }
+       }
+   
+   public void table_load()
+    {
+     try
+     {
+    pst = con.prepareStatement("select surg_room, booking,status from booktable order by booking ");
+    rs = pst.executeQuery(); 
+    table.setModel(DbUtils.resultSetToTableModel(rs));
+     }
+     catch (SQLException e)
+     {
+     e.printStackTrace();
+     
+
+     }
+    }
+   
+   
+
+
+
+   /**
+    * Initialize the contents of the frame.
+    */
+   private void initialize() {
+      frame = new JFrame();
+      frame.setBounds(100, 100, 1313, 727);
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      frame.getContentPane().setLayout(null);
+      
+      JPanel panel = new JPanel();
+      panel.setBackground(new Color(236, 251, 253));
+      panel.setForeground(new Color(0, 0, 0));
+      panel.setBounds(634, 10, 653, 47);
+      frame.getContentPane().add(panel);
+      panel.setLayout(null);
+      
+      JPanel panel_3 = new JPanel();
+      panel_3.setBorder(new TitledBorder(null, "Counter Info", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+      panel_3.setBounds(22, 53, 550, 229);
+      frame.getContentPane().add(panel_3);
+      panel_3.setLayout(null);
+      
+      JPanel panel_4 = new JPanel();
+         panel_4.setBorder(new TitledBorder(null, "Count Info", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+         panel_4.setBounds(930, 362, 357, 277);
+         frame.getContentPane().add(panel_4);
+         panel_4.setLayout(null);
+      
+      JLabel lblNewLabel_1 = new JLabel("\uCF54\uB4DC");
+      lblNewLabel_1.setBounds(30, 48, 111, 15);
+      panel_3.add(lblNewLabel_1);
+      
+      JLabel lblNewLabel_2 = new JLabel("\uC774\uB984");
+      lblNewLabel_2.setBounds(30, 73, 111, 30);
+      panel_3.add(lblNewLabel_2);
+      
+      JLabel lblNewLabel_3_6 = new JLabel("\uC131\uBCC4");
+      lblNewLabel_3_6.setBounds(30, 113, 124, 36);
+      panel_3.add(lblNewLabel_3_6);
+      
+      
+       txtmale = new JTextField();
+         txtmale.setBounds(105, 58, 96, 21);
+         panel_4.add(txtmale);
+         txtmale.setColumns(10);
+         
+         txtfemale = new JTextField();
+         txtfemale.setBounds(105, 89, 96, 21);
+         panel_4.add(txtfemale);
+         txtfemale.setColumns(10);
+         
+         txt20 = new JTextField();
+         txt20.setBounds(105, 123, 96, 21);
+         panel_4.add(txt20);
+         txt20.setColumns(10);
+         
+         txt30 = new JTextField();
+         txt30.setBounds(105, 159, 96, 21);
+         panel_4.add(txt30);
+         txt30.setColumns(10);
+         
+         txt40 = new JTextField();
+         txt40.setBounds(105, 190, 96, 21);
+         panel_4.add(txt40);
+         txt40.setColumns(10);
+         
+         comsurgery = new JComboBox();
+         comsurgery.setBounds(234, 57, 102, 23);
+         panel_4.add(comsurgery);
+         
+         JButton btnsurgery = new JButton("Search");
+         btnsurgery.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               String reserve_date = combeforedate.getSelectedItem().toString();
+               
+               String surg_name = comsurgery.getSelectedItem().toString();
+               try
+                  {
+                  pst = con.prepareStatement( "SELECT male, female, 20S, 30S, 40S, total_amount FROM summary1 where reserve_date =? and surg_name =?" );
+                  pst.setString(1, reserve_date);
+
+                  pst.setString(2, surg_name);
+                  rs = pst.executeQuery();
+      
+               if ( rs.next() == true )
+                  {
+               txtmale.setText(rs.getString(1));
+               txtfemale.setText(rs.getString(2));
+               txt20.setText(rs.getString(3));
+               txt30.setText(rs.getString(4));
+               txt40.setText(rs.getString(5));
+               txttotal.setText(rs.getString(6));
+             
+                  }
+               else
+               {
+                   JOptionPane.showMessageDialog(null, "Record Not Found");
+               }
+                  }
+                  catch ( Exception e1 )
+                  {
+                  e1.printStackTrace();
+                  }
+               
+            }
+         });
+         btnsurgery.setBounds(234, 86, 91, 23);
+         panel_4.add(btnsurgery);
+         
+         combeforedate = new JComboBox();
+         combeforedate.setBounds(105, 18, 96, 23);
+         panel_4.add(combeforedate);
+         JLabel lblNewLabel_9 = new JLabel("\uB0A0\uC9DC");
+         lblNewLabel_9.setBounds(25, 22, 50, 15);
+         panel_4.add(lblNewLabel_9);
+         
+         JLabel lblNewLabel_10 = new JLabel("남자");
+         lblNewLabel_10.setBounds(25, 61, 50, 15);
+         panel_4.add(lblNewLabel_10);
+         
+         JLabel lblNewLabel_11 = new JLabel("여자");
+         lblNewLabel_11.setBounds(25, 92, 50, 15);
+         panel_4.add(lblNewLabel_11);
+         
+         JLabel lblNewLabel_12 = new JLabel("20S");
+         lblNewLabel_12.setBounds(25, 126, 50, 15);
+         panel_4.add(lblNewLabel_12);
+         
+         JLabel lblNewLabel_13 = new JLabel("30S");
+         lblNewLabel_13.setBounds(25, 162, 50, 15);
+         panel_4.add(lblNewLabel_13);
+         
+         JLabel lblNewLabel_14 = new JLabel("TOTAL");
+         lblNewLabel_14.setBounds(25, 224, 50, 15);
+         panel_4.add(lblNewLabel_14);
+         JLabel lblNewLabel_15 = new JLabel("40S");
+         lblNewLabel_15.setBounds(25, 193, 50, 15);
+         panel_4.add(lblNewLabel_15);
+         
+         txttotal = new JTextField();
+         txttotal.setBounds(105, 221, 96, 21);
+         panel_4.add(txttotal);
+         txttotal.setColumns(10);
+         
+         JPanel panel_2 = new JPanel();
+         panel_2.setBackground(new Color(128, 255, 128));
+         panel_2.setBounds(930, 315, 357, 37);
+         frame.getContentPane().add(panel_2);
+         panel_2.setLayout(null);
+         
+         JLabel lblNewLabel_6 = new JLabel("Count");
+         lblNewLabel_6.setFont(new Font("굴림", Font.BOLD, 14));
+         lblNewLabel_6.setBounds(160, 10, 50, 15);
+         panel_2.add(lblNewLabel_6);
+         
+         JPanel panel_6 = new JPanel();
+         panel_6.setBorder(new TitledBorder(null, "Cost Info", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+         panel_6.setBounds(615, 361, 303, 328);
+         frame.getContentPane().add(panel_6);
+         panel_6.setLayout(null);
+         
+         JLabel lblNewLabel_17 = new JLabel("눈수술");
+         lblNewLabel_17.setBounds(12, 57, 50, 15);
+         panel_6.add(lblNewLabel_17);
+         
+         JLabel lblNewLabel_19 = new JLabel("코수술\r\n");
+         lblNewLabel_19.setBounds(12, 85, 50, 15);
+         panel_6.add(lblNewLabel_19);
+         
+         JLabel lblNewLabel_20 = new JLabel("양악수술\r\n");
+         lblNewLabel_20.setBounds(12, 113, 50, 15);
+         panel_6.add(lblNewLabel_20);
+         
+         txteye = new JTextField();
+         txteye.setBounds(197, 54, 77, 21);
+         panel_6.add(txteye);
+         txteye.setColumns(10);
+         
+         txtnose = new JTextField();
+         txtnose.setBounds(197, 82, 77, 21);
+         panel_6.add(txtnose);
+         txtnose.setColumns(10);
+         
+         txtchin = new JTextField();
+         txtchin.setBounds(197, 110, 77, 21);
+         panel_6.add(txtchin);
+         txtchin.setColumns(10);
+         
+         JButton btncost = new JButton("Cost");
+         btncost.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               String reserve_date = combeforedate.getSelectedItem().toString();
+               try {
+                  pst = con.prepareStatement( "SELECT total_price FROM summary1 where reserve_date = ? and surg_name ='눈수술' " );        
+                  pst.setString(1, reserve_date);
+                  rs = pst.executeQuery();  
+               if ( rs.next() == true ) {
+               txteye.setText(rs.getString(1)); }
+               else  {
+                   JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                  catch ( Exception e1 )    {
+                  e1.printStackTrace(); }
+               try {
+                   pst = con.prepareStatement( "SELECT total_price FROM summary1 where reserve_date = ? and surg_name ='코수술' " );        
+                   pst.setString(1, reserve_date);
+                   rs = pst.executeQuery();  
+                if ( rs.next() == true ) {
+                txtnose.setText(rs.getString(1)); }
+                else  {
+                    JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                   catch ( Exception e1 )    {
+                   e1.printStackTrace(); }
+               try {
+                   pst = con.prepareStatement( "SELECT total_price FROM summary1 where reserve_date = ? and surg_name ='양악수술' " );        
+                   pst.setString(1, reserve_date);
+                   rs = pst.executeQuery();  
+                if ( rs.next() == true ) {
+                txtchin.setText(rs.getString(1)); }
+                else  {
+                    JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                   catch ( Exception e1 )    {
+                   e1.printStackTrace(); }
+               try {
+                   pst = con.prepareStatement( "SELECT total_price FROM summary1 where reserve_date = ? and surg_name ='지방흡입' " );        
+                   pst.setString(1, reserve_date);
+                   rs = pst.executeQuery();  
+                if ( rs.next() == true ) {
+                txtfat.setText(rs.getString(1)); }
+                else  {
+                    JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                   catch ( Exception e1 )    {
+                   e1.printStackTrace(); }
+               try {
+                   pst = con.prepareStatement( "SELECT total_price FROM summary1 where reserve_date = ? and surg_name ='필러' " );        
+                   pst.setString(1, reserve_date);
+                   rs = pst.executeQuery();  
+                if ( rs.next() == true ) {
+                txtfiller.setText(rs.getString(1)); }
+                else  {
+                    JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                   catch ( Exception e1 )    {
+                   e1.printStackTrace(); }
+               try {
+                   pst = con.prepareStatement( "SELECT total_price FROM summary1 where reserve_date = ? and surg_name ='보톡스' " );        
+                   pst.setString(1, reserve_date);
+                   rs = pst.executeQuery();  
+                if ( rs.next() == true ) {
+                txtboto.setText(rs.getString(1)); }
+                else  {
+                    JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                   catch ( Exception e1 )    {
+                   e1.printStackTrace(); }
+               try {
+                   pst = con.prepareStatement( "SELECT total_price FROM summary1 where reserve_date = ? and surg_name ='미백주사' " );        
+                   pst.setString(1, reserve_date);
+                   rs = pst.executeQuery();  
+                if ( rs.next() == true ) {
+                txtwhite.setText(rs.getString(1)); }
+                else  {
+                    JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                   catch ( Exception e1 )    {
+                   e1.printStackTrace(); }
+               try {
+                   pst = con.prepareStatement( "SELECT total_price FROM summary1 where reserve_date = ? and surg_name ='윤곽주사' " );        
+                   pst.setString(1, reserve_date);
+                   rs = pst.executeQuery();  
+                if ( rs.next() == true ) {
+                txtout.setText(rs.getString(1)); }
+                else  {
+                    JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                   catch ( Exception e1 )    {
+                   e1.printStackTrace(); }
+               try {
+                   pst = con.prepareStatement( "SELECT sum(total_price) FROM summary1 where reserve_date = ? " );        
+                   pst.setString(1, reserve_date);
+                   rs = pst.executeQuery();  
+                if ( rs.next() == true ) {
+                txtsum.setText(rs.getString(1)); }
+                else  {
+                    JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                   catch ( Exception e1 )    {
+                   e1.printStackTrace(); }
+               try {
+                   pst = con.prepareStatement( "SELECT total_amount FROM summary1 where reserve_date=? and surg_name= '눈수술' " );        
+                   pst.setString(1, reserve_date);
+                   rs = pst.executeQuery();  
+                if ( rs.next() == true ) {
+                txteyecount.setText(rs.getString(1)); }
+                else  {
+                    JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                   catch ( Exception e1 )    {
+                   e1.printStackTrace(); }
+               try {
+                   pst = con.prepareStatement( "SELECT total_amount FROM summary1 where reserve_date=? and surg_name= '코수술' " );        
+                   pst.setString(1, reserve_date);
+                   rs = pst.executeQuery();  
+                if ( rs.next() == true ) {
+                txtnosecount.setText(rs.getString(1)); }
+                else  {
+                    JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                   catch ( Exception e1 )    {
+                   e1.printStackTrace(); }
+               try {
+                   pst = con.prepareStatement( "SELECT total_amount FROM summary1 where reserve_date=? and surg_name= '양악수술' " );        
+                   pst.setString(1, reserve_date);
+                   rs = pst.executeQuery();  
+                if ( rs.next() == true ) {
+                txtchincount.setText(rs.getString(1)); }
+                else  {
+                    JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                   catch ( Exception e1 )    {
+                   e1.printStackTrace(); }
+               try {
+                   pst = con.prepareStatement( "SELECT total_amount FROM summary1 where reserve_date=? and surg_name= '지방흡입' " );        
+                   pst.setString(1, reserve_date);
+                   rs = pst.executeQuery();  
+                if ( rs.next() == true ) {
+                txtfatcount.setText(rs.getString(1)); }
+                else  {
+                    JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                   catch ( Exception e1 )    {
+                   e1.printStackTrace(); }
+               try {
+                   pst = con.prepareStatement( "SELECT total_amount FROM summary1 where reserve_date=? and surg_name= '필러' " );        
+                   pst.setString(1, reserve_date);
+                   rs = pst.executeQuery();  
+                if ( rs.next() == true ) {
+                txtfillercount.setText(rs.getString(1)); }
+                else  {
+                    JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                   catch ( Exception e1 )    {
+                   e1.printStackTrace(); }
+               try {
+                   pst = con.prepareStatement( "SELECT total_amount FROM summary1 where reserve_date=? and surg_name= '보톡스' " );        
+                   pst.setString(1, reserve_date);
+                   rs = pst.executeQuery();  
+                if ( rs.next() == true ) {
+                txtbotocount.setText(rs.getString(1)); }
+                else  {
+                    JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                   catch ( Exception e1 )    {
+                   e1.printStackTrace(); }
+               try {
+                   pst = con.prepareStatement( "SELECT total_amount FROM summary1 where reserve_date=? and surg_name= '미백주사' " );        
+                   pst.setString(1, reserve_date);
+                   rs = pst.executeQuery();  
+                if ( rs.next() == true ) {
+                txtwhitecount.setText(rs.getString(1)); }
+                else  {
+                    JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                   catch ( Exception e1 )    {
+                   e1.printStackTrace(); }
+               try {
+                   pst = con.prepareStatement( "SELECT total_amount FROM summary1 where reserve_date=? and surg_name= '윤곽주사' " );        
+                   pst.setString(1, reserve_date);
+                   rs = pst.executeQuery();  
+                if ( rs.next() == true ) {
+                txtoutcount.setText(rs.getString(1)); }
+                else  {
+                    JOptionPane.showMessageDialog(null, "Record Not Found"); } }
+                   catch ( Exception e1 )    {
+                   e1.printStackTrace(); }
+            }
+         });
+         btncost.setBounds(104, 21, 91, 23);
+         panel_6.add(btncost);
+         
+         JLabel lblNewLabel_21 = new JLabel("지방흡입");
+         lblNewLabel_21.setBounds(12, 141, 50, 15);
+         panel_6.add(lblNewLabel_21);
+         
+         txtfat = new JTextField();
+         txtfat.setBounds(197, 138, 77, 21);
+         panel_6.add(txtfat);
+         txtfat.setColumns(10);
+         
+         txtfiller = new JTextField();
+         txtfiller.setBounds(197, 166, 77, 21);
+         panel_6.add(txtfiller);
+         txtfiller.setColumns(10);
+         
+         JLabel lblNewLabel_22 = new JLabel("필러");
+         lblNewLabel_22.setBounds(12, 169, 50, 15);
+         panel_6.add(lblNewLabel_22);
+         
+         JLabel lblNewLabel_23 = new JLabel("보톡스\r\n");
+         lblNewLabel_23.setBounds(12, 200, 50, 15);
+         panel_6.add(lblNewLabel_23);
+         
+         txtboto = new JTextField();
+         txtboto.setBounds(197, 197, 77, 21);
+         panel_6.add(txtboto);
+         txtboto.setColumns(10);
+         
+         JLabel lblNewLabel_24 = new JLabel("미백주사");
+         lblNewLabel_24.setBounds(12, 231, 50, 15);
+         panel_6.add(lblNewLabel_24);
+         
+         txtwhite = new JTextField();
+         txtwhite.setBounds(197, 228, 77, 21);
+         panel_6.add(txtwhite);
+         txtwhite.setColumns(10);
+         
+         JLabel lblNewLabel_25 = new JLabel("윤곽주사");
+         lblNewLabel_25.setBounds(12, 262, 50, 15);
+         panel_6.add(lblNewLabel_25);
+         
+         txtout = new JTextField();
+         txtout.setBounds(197, 259, 77, 21);
+         panel_6.add(txtout);
+         txtout.setColumns(10);
+         
+         txtsum = new JTextField();
+         txtsum.setBounds(50, 289, 115, 21);
+         panel_6.add(txtsum);
+         txtsum.setColumns(10);
+         
+         JLabel lblNewLabel_26 = new JLabel("매출");
+         lblNewLabel_26.setBounds(12, 292, 50, 15);
+         panel_6.add(lblNewLabel_26);
+         
+         JLabel lblNewLabel_27 = new JLabel("600,000");
+         lblNewLabel_27.setBounds(84, 57, 50, 15);
+         panel_6.add(lblNewLabel_27);
+         
+         JLabel lblNewLabel_28 = new JLabel("3,000,000");
+         lblNewLabel_28.setBounds(84, 85, 63, 15);
+         panel_6.add(lblNewLabel_28);
+         
+         JLabel lblNewLabel_29 = new JLabel("12,000,000");
+         lblNewLabel_29.setBounds(84, 113, 63, 15);
+         panel_6.add(lblNewLabel_29);
+         
+         JLabel lblNewLabel_30 = new JLabel("1,700,000");
+         lblNewLabel_30.setBounds(84, 141, 63, 15);
+         panel_6.add(lblNewLabel_30);
+         
+         JLabel lblNewLabel_31 = new JLabel("300,000");
+         lblNewLabel_31.setBounds(84, 169, 50, 15);
+         panel_6.add(lblNewLabel_31);
+         
+         JLabel lblNewLabel_32 = new JLabel("80,000");
+         lblNewLabel_32.setBounds(84, 200, 50, 15);
+         panel_6.add(lblNewLabel_32);
+         
+         JLabel lblNewLabel_33 = new JLabel("20,000");
+         lblNewLabel_33.setBounds(84, 231, 50, 15);
+         panel_6.add(lblNewLabel_33);
+         
+         JLabel lblNewLabel_34 = new JLabel("80,000");
+         lblNewLabel_34.setBounds(84, 262, 50, 15);
+         panel_6.add(lblNewLabel_34);
+         
+         txteyecount = new JTextField();
+         txteyecount.setBounds(156, 54, 29, 21);
+         panel_6.add(txteyecount);
+         txteyecount.setColumns(10);
+         
+         txtnosecount = new JTextField();
+         txtnosecount.setBounds(156, 82, 29, 21);
+         panel_6.add(txtnosecount);
+         txtnosecount.setColumns(10);
+         
+         txtchincount = new JTextField();
+         txtchincount.setBounds(156, 110, 29, 21);
+         panel_6.add(txtchincount);
+         txtchincount.setColumns(10);
+         
+         txtfatcount = new JTextField();
+         txtfatcount.setBounds(156, 138, 29, 21);
+         panel_6.add(txtfatcount);
+         txtfatcount.setColumns(10);
+         
+         txtfillercount = new JTextField();
+         txtfillercount.setBounds(156, 166, 29, 21);
+         panel_6.add(txtfillercount);
+         txtfillercount.setColumns(10);
+         
+         txtbotocount = new JTextField();
+         txtbotocount.setBounds(156, 197, 29, 21);
+         panel_6.add(txtbotocount);
+         txtbotocount.setColumns(10);
+         
+         txtwhitecount = new JTextField();
+         txtwhitecount.setBounds(156, 228, 29, 21);
+         panel_6.add(txtwhitecount);
+         txtwhitecount.setColumns(10);
+         
+         txtoutcount = new JTextField();
+         txtoutcount.setBounds(156, 259, 29, 21);
+         panel_6.add(txtoutcount);
+         txtoutcount.setColumns(10);
+         
+      
+      
+      txtcus_code = new JTextField();
+      txtcus_code.setBounds(108, 45, 96, 21);
+      panel_3.add(txtcus_code);
+      txtcus_code.setColumns(10);
+      
+      txtcus_name = new JTextField();
+      txtcus_name.setBounds(108, 78, 96, 21);
+      panel_3.add(txtcus_name);
+      txtcus_name.setColumns(10);
+      
+      txtcus_sex = new JTextField();
+      txtcus_sex.setBounds(108, 121, 96, 21);
+      panel_3.add(txtcus_sex);
+      txtcus_sex.setColumns(10);
+      
+      JLabel lblNewLabel_3_1 = new JLabel("\uC0DD\uB144\uC6D4\uC77C");
+      lblNewLabel_3_1.setBounds(30, 153, 124, 36);
+      panel_3.add(lblNewLabel_3_1);
+      
+      JLabel lblNewLabel_3_2 = new JLabel("\uC804\uD654\uBC88\uD638");
+      lblNewLabel_3_2.setBounds(30, 192, 124, 36);
+      panel_3.add(lblNewLabel_3_2);
+      
+      txtcus_birth = new JTextField();
+      txtcus_birth.setColumns(10);
+      txtcus_birth.setBounds(108, 159, 96, 21);
+      panel_3.add(txtcus_birth);
+      
+      txtcus_phone = new JTextField();
+      txtcus_phone.setColumns(10);
+      txtcus_phone.setBounds(108, 200, 96, 21);
+      panel_3.add(txtcus_phone);
+      
+      JLabel lblNewLabel_4 = new JLabel("CUS_PHONE");
+      lblNewLabel_4.setBounds(280, 21, 96, 18);
+      panel_3.add(lblNewLabel_4);
+      
+      JScrollPane scrollPane_3 = new JScrollPane();
+      scrollPane_3.setBounds(242, 113, 296, 90);
+      panel_3.add(scrollPane_3);
+      
+      
+      
+      
+      JLabel lblNewLabel_8 = new JLabel("operation booking");
+      lblNewLabel_8.setFont(new Font("굴림", Font.BOLD, 17));
+      lblNewLabel_8.setBounds(252, 0, 224, 48);
+      panel.add(lblNewLabel_8);
+      
+      JLabel lblNewLabel_5 = new JLabel("cus_code");
+      lblNewLabel_5.setFont(new Font("굴림", Font.BOLD, 14));
+      lblNewLabel_5.setBounds(644, 70, 115, 15);
+      frame.getContentPane().add(lblNewLabel_5);
+      
+      JLabel lblNewLabel_1_6 = new JLabel("surgery");
+      lblNewLabel_1_6.setFont(new Font("굴림", Font.BOLD, 14));
+      lblNewLabel_1_6.setBounds(644, 112, 60, 15);
+      frame.getContentPane().add(lblNewLabel_1_6);
+      
+      JLabel lblNewLabel_7 = new JLabel("date");
+      lblNewLabel_7.setFont(new Font("굴림", Font.BOLD, 14));
+      lblNewLabel_7.setBounds(644, 188, 52, 15);
+      frame.getContentPane().add(lblNewLabel_7);
+      
+      
+      
+      
+      
+      txtcode = new JTextField();
+      txtcode.setBounds(767, 67, 106, 21);
+      frame.getContentPane().add(txtcode);
+      txtcode.setColumns(10);
+      
+      JComboBox txtsurgery = new JComboBox();
+      txtsurgery.setModel(new DefaultComboBoxModel(new String[] {"선택", "코수술", "양악수술", "눈수술", "지방흡입", "미백주사", "윤곽주사", "보톡스", "필러"}));
+      txtsurgery.setBounds(767, 108, 106, 23);
+      frame.getContentPane().add(txtsurgery);
+      
+      JComboBox txtroom = new JComboBox();
+      txtroom.setModel(new DefaultComboBoxModel(new String[] {"선택", "1", "2"}));
+      txtroom.setBounds(767, 147, 106, 23);
+      frame.getContentPane().add(txtroom);
+      
+      JScrollPane scrollPane = new JScrollPane();
+      scrollPane.setBounds(922, 67, 357, 215);
+      frame.getContentPane().add(scrollPane);
+      
+      table = new JTable();
+      scrollPane.setViewportView(table);
+      table.setModel(new DefaultTableModel(
+         new Object[][] {
+         },
+         new String[] {
+         }
+      ));
+      
+      txtdate = new JComboBox();
+      txtdate.setBounds(767, 185, 106, 21);
+      frame.getContentPane().add(txtdate);
+      
+      JLabel lblNewLabel_2_1 = new JLabel("hour");
+      lblNewLabel_2_1.setFont(new Font("굴림", Font.BOLD, 14));
+      lblNewLabel_2_1.setBounds(644, 222, 52, 15);
+      frame.getContentPane().add(lblNewLabel_2_1);
+      
+      txthour = new JComboBox();
+      txthour.setBounds(767, 216, 106, 21);
+      frame.getContentPane().add(txthour);
+      
+      JScrollPane scrollPane_3_1 = new JScrollPane();
+      scrollPane_3_1.setBounds(22, 413, 550, 185);
+      frame.getContentPane().add(scrollPane_3_1);
+      
+      txtdate_1 = new JComboBox();
+      txtdate_1.setBounds(74, 621, 106, 21);
+      frame.getContentPane().add(txtdate_1);
+      
+      txthour_1 = new JComboBox();
+      txthour_1.setBounds(229, 621, 106, 21);
+      frame.getContentPane().add(txthour_1);
+      
+      JButton btnNewButton_4 = new JButton("Search");
+      btnNewButton_4.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            String CUS_NAME = txtCODE.getSelectedItem().toString();
+                try
+                   {
+                   pst = con.prepareStatement( "SELECT * FROM customer where cus_phone = ?" );
+                   pst.setString(1, CUS_NAME);
+                   rs = pst.executeQuery();
+       
+                if ( rs.next() == true )
+                   {
+                txtcode.setText(rs.getString(1));
+                txtcus_code.setText(rs.getString(1));
+                txtcus_name.setText(rs.getString(2));
+                txtcus_sex.setText(rs.getString(3));
+                txtcus_birth.setText(rs.getString(4));
+                txtcus_phone.setText(rs.getString(5));
+                   }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Record Not Found");
+                }
+                   }
+                   catch ( Exception e1 )
+                   {
+                   e1.printStackTrace();
+                   }
+         }
+      });
+      btnNewButton_4.setBounds(280, 77, 91, 23);
+      panel_3.add(btnNewButton_4);
+      
+      
+      
+      
+      txtCODE = new JComboBox();
+      txtCODE.setBounds(265, 44, 111, 23);
+      panel_3.add(txtCODE);
+      
+      txtCODE_1 = new JComboBox();
+      txtCODE_1.setBounds(425, 44, 96, 23);
+      panel_3.add(txtCODE_1);
+      
+      JLabel lblNewLabel_4_1 = new JLabel("CUS_CODE");
+      lblNewLabel_4_1.setBounds(425, 21, 96, 18);
+      panel_3.add(lblNewLabel_4_1);
+
+      
+      JPanel panel_1 = new JPanel();
+      panel_1.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+      panel_1.setBounds(22, 277, 550, 47);
+      frame.getContentPane().add(panel_1);
+      panel_1.setLayout(null);
+      
+      
+   
+      
+      JButton btnNewButton_2 = new JButton("DELETE");
+      btnNewButton_2.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            String CUS_CODE;
+            CUS_CODE =  txtCODE_1.getSelectedItem().toString();
+            try {
+            pst = con.prepareStatement("delete from reservation_history where cus_code = ?;");
+            
+                pst.setString(1, CUS_CODE);
+                pst.executeUpdate();
+                
+                table_load_3();
+                LoadCode();
+                LoadCode_1();
+                
+            pst = con.prepareStatement("delete from customer where cus_code = ?");
+                pst.setString(1, CUS_CODE);
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Delete");
+                table_load_3();
+                
+                LoadCode();
+                LoadCode_1();
+              
+                txtcus_name.setText("");
+                        txtcus_code.setText("");
+                        txtcus_sex.setText("");
+                        txtcus_birth.setText("");
+                        txtcus_phone.setText("");
+                        txtcus_code.requestFocus();
+            }
+
+                catch (SQLException e1) {
+            e1.printStackTrace();
+            }
+         }
+      });
+      btnNewButton_2.setBounds(212, 10, 91, 23);
+      panel_1.add(btnNewButton_2);
+      
+      JButton btnNewButton_3 = new JButton("REFRESH");
+      btnNewButton_3.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            txtcus_name.setText("");
+               txtcus_code.setText("");
+               txtcus_sex.setText("");
+               txtcus_birth.setText("");
+               txtcus_phone.setText("");
+               txtcode.setText("");
+               
+               txtcus_code.requestFocus();
+               
+               table_load_1();
+               
+               
+              
+               
+         }
+      });
+      btnNewButton_3.setBounds(352, 10, 91, 23);
+      panel_1.add(btnNewButton_3);
+      
+      
+      
+      
+      JButton btnNewButton = new JButton("ADD");
+      btnNewButton.setBounds(62, 10, 71, 23);
+      panel_1.add(btnNewButton);
+      btnNewButton.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            String  CUS_CODE,CUS_NAME,CUS_SEX,CUS_BIRTH_,CUS_PHONE;
+
+            CUS_CODE = txtcus_code.getText();
+            CUS_NAME = txtcus_name.getText();
+            CUS_SEX = txtcus_sex.getText();
+            CUS_BIRTH_ = txtcus_birth.getText();
+            CUS_PHONE = txtcus_phone.getText();
+            
+
+            try {
+            pst = con.prepareStatement("insert into customer(cus_name,cus_sex,cus_birth,cus_phone)values(?,?,?,?)");
+            
+            pst.setString(1, CUS_NAME);
+            pst.setString(2, CUS_SEX);
+            pst.setString(3, CUS_BIRTH_);
+            pst.setString(4, CUS_PHONE);
+            pst.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "ADD COMPLETED");
+            table_load_3();
+            
+            LoadCode();
+            LoadCode_1();
+                      
+            txtcus_code.setText("");
+            txtcus_name.setText("");
+            txtcus_sex.setText("");
+            txtcus_birth.setText("");
+            txtcus_phone.setText("");
+            txtcus_code.requestFocus();
+            txtCODE.addItem(CUS_PHONE);
+            //txtCODE_1.addItem(CUS_CODE);
+            txtCODE.setSelectedItem("");
+            
+
+
+            }
+             
+            catch (SQLException e1)
+                    {
+            e1.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error");
+           
+            
+            }
+         }
+      });
+      /*
+      JScrollPane scrollPane_1 = new JScrollPane();
+      scrollPane_1.setBounds(60, 85, 462, 90);
+      panel_1.add(scrollPane_1);
+      */
+      table_3 = new JTable();
+      scrollPane_3.setViewportView(table_3);
+      
+      table_1 = new JTable();
+      
+      
+      table_4 = new JTable();
+      scrollPane_3_1.setViewportView(table_4);
+      /*
+      scrollPane_1.setViewportView(table_1);
+      */
+
+      
+      
+      JButton btnNewButton_8 = new JButton("show");
+      btnNewButton_8.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+
+            String book = txtdchooser.getDate().toString();
+                try
+                   {
+                   pst = con.prepareStatement( "SELECT * FROM reservation where booking like  '?%'" );
+                   pst.setString(1, book);
+                   rs = pst.executeQuery();
+       
+                if ( rs.next() == true )
+                   {
+                    txtroom.setToolTipText(rs.getString(2));
+                    txtdate.setToolTipText(rs.getString(3));
+                    txthour.setToolTipText(rs.getString(4));
+
+                
+                   }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Record Not Found");
+                }
+                   }
+                   catch ( Exception e1 )
+                   {
+                   e1.printStackTrace();
+                   }
+
+
+         
+      }
+         
+   
+      });
+      
+      JButton btnUpdate = new JButton("add");
+      btnUpdate.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            String  code, surgery,room,date,hour;
+
+                 
+               code = txtcode.getText();
+               surgery = txtsurgery.getSelectedItem().toString();
+               room = txtroom.getSelectedItem().toString();
+               date = txtdate.getSelectedItem().toString();
+               hour = txthour.getSelectedItem().toString();
+               
+
+               try {
+               pst = con.prepareStatement("insert into reservation_history(cus_code,surg_name,surg_room,reserve_date,reserve_hour)values(?,?,?,?,?)");
+               pst.setString(1, code);
+               pst.setString(2, surgery);
+               pst.setString(3, room);
+               pst.setString(4, date);
+               pst.setString(5, hour);
+               pst.executeUpdate();
+
+               
+               
+               JOptionPane.showMessageDialog(null, "ADD COMPLETED");
+               //table_load_2();
+          
+           
+              
+               txtcode.setText("");
+               txtsurgery.setSelectedItem("선택");
+               txtdate.setSelectedItem("선택");
+               txthour.setSelectedItem("선택");
+               txtcode.requestFocus();
+               
+     
+
+                  }
+                
+               catch (SQLException e1)
+                       {
+               e1.printStackTrace();
+               JOptionPane.showMessageDialog(null, "Record Failed");
+               }
+            }
+         
+      });
+      
+      JButton btnUpdate_1 = new JButton("update");
+      btnUpdate_1.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            String  code, surgery,room,date,hour;
+
+                 
+               code = txtcode.getText();
+               surgery = txtsurgery.getSelectedItem().toString();
+               room = txtroom.getSelectedItem().toString();
+               date = txtdate.getSelectedItem().toString();
+               hour = txthour.getSelectedItem().toString();
+               
+               
+
+               try {
+               pst = con.prepareStatement("update reservation_history set surg_name=?, surg_room=?, reserve_date=?,reserve_hour =? where cus_code = ?");
+               
+               pst.setString(1, surgery);
+               pst.setString(2, room);
+               pst.setString(3, date);
+               pst.setString(4, hour);
+               pst.setString(5, code);
+               pst.executeUpdate();
+               
+               
+               JOptionPane.showMessageDialog(null, "ADD COMPLETED");
+               //table_load_2();
+               
+          
+           
+             
+               txtcode.setText("");
+               txtsurgery.setSelectedItem("선택");
+               txtdate.setSelectedItem("선택");
+               txthour.setSelectedItem("선택");
+               txtcode.requestFocus();
+               
+     
+
+                  }
+                
+               catch (SQLException e1)
+                       {
+               e1.printStackTrace();
+               JOptionPane.showMessageDialog(null, "Record Failed");
+               }
+            }
+         
+      });
+      
+      btnUpdate.setFont(new Font("굴림", Font.BOLD, 12));
+      btnUpdate.setBounds(640, 261, 81, 23);
+      frame.getContentPane().add(btnUpdate);
+      
+      btnUpdate_1.setFont(new Font("굴림", Font.BOLD, 12));
+      btnUpdate_1.setBounds(720, 261, 81, 23);
+      frame.getContentPane().add(btnUpdate_1);
+      
+      JLabel lblNewLabel_3 = new JLabel("room");
+      lblNewLabel_3.setFont(new Font("굴림", Font.BOLD, 13));
+      lblNewLabel_3.setBounds(644, 151, 52, 15);
+      frame.getContentPane().add(lblNewLabel_3);
+      
+      JPanel panel_9 = new JPanel();
+      panel_9.setLayout(null);
+      panel_9.setForeground(Color.BLACK);
+      panel_9.setBackground(new Color(236, 251, 253));
+      panel_9.setBounds(22, 10, 550, 37);
+      frame.getContentPane().add(panel_9);
+      
+      
+      JLabel lblNewLabel = new JLabel("CUSTOMER INFO");
+      lblNewLabel.setBounds(192, 10, 168, 23);
+      panel_9.add(lblNewLabel);
+      lblNewLabel.setFont(new Font("굴림", Font.BOLD, 15));
+      
+      JLabel lblNewLabel_1_2 = new JLabel("name");
+      lblNewLabel_1_2.setFont(new Font("굴림", Font.BOLD, 14));
+      lblNewLabel_1_2.setBounds(33, 116, 115, 15);
+      frame.getContentPane().add(lblNewLabel_1_2);
+      
+      JLabel lblNewLabel_1_3 = new JLabel("sex");
+      lblNewLabel_1_3.setFont(new Font("굴림", Font.BOLD, 14));
+      lblNewLabel_1_3.setBounds(33, 155, 115, 15);
+      frame.getContentPane().add(lblNewLabel_1_3);
+      
+      JLabel lblNewLabel_1_4 = new JLabel("birth");
+      lblNewLabel_1_4.setFont(new Font("굴림", Font.BOLD, 14));
+      lblNewLabel_1_4.setBounds(255, 113, 115, 15);
+      frame.getContentPane().add(lblNewLabel_1_4);
+      
+      JLabel lblNewLabel_1_5 = new JLabel("phone");
+      lblNewLabel_1_5.setFont(new Font("굴림", Font.BOLD, 14));
+      lblNewLabel_1_5.setBounds(255, 151, 115, 15);
+      frame.getContentPane().add(lblNewLabel_1_5);
+      
+      
+      JButton btnNewButton_5 = new JButton("search");
+      btnNewButton_5.setBounds(389, 620, 93, 23);
+      frame.getContentPane().add(btnNewButton_5);
+      
+      JPanel panel_5 = new JPanel();
+      panel_5.setBounds(615, 315, 303, 37);
+      frame.getContentPane().add(panel_5);
+      panel_5.setBackground(new Color(128, 255, 128));
+      panel_5.setLayout(null);
+      
+      JLabel lblNewLabel_16 = new JLabel("Cost");
+      lblNewLabel_16.setFont(new Font("굴림", Font.BOLD, 15));
+      lblNewLabel_16.setBounds(114, 10, 37, 15);
+      panel_5.add(lblNewLabel_16);
+      
+      JPanel panel_7 = new JPanel();
+      panel_7.setBackground(new Color(128, 255, 128));
+      panel_7.setBounds(32, 342, 527, 47);
+      frame.getContentPane().add(panel_7);
+      panel_7.setLayout(null);
+      
+      JLabel lblNewLabel_18 = new JLabel("Summary");
+      lblNewLabel_18.setFont(new Font("굴림", Font.BOLD, 25));
+      lblNewLabel_18.setBounds(208, 10, 129, 27);
+      panel_7.add(lblNewLabel_18);
+      btnNewButton_5.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            String  res_date,res_hour;
+
+            res_date = txtdate_1.getSelectedItem().toString();
+            res_hour = txthour_1.getSelectedItem().toString();
+            
+
+            try {
+            pst = con.prepareStatement("drop table if exists summary;");
+            pst.executeUpdate();
+            table_load_4();
+            
+            
+            
+            pst = con.prepareStatement("create table summary select h.surg_name,count(case when cus_birth between'1994-01-01'and'2003-12-31'then 1 end) AS '20대',count(case when cus_birth between'1984-01-01'and'1993-12-31'then 1 end) AS '30대',"
+                  + "count(case when cus_birth between'1974-01-01'and'1983-12-31'then 1 end) AS '40대',count(case when c.cus_sex='남' then 1 end) AS '남자',count(case when c.cus_sex='여' then 1 end) AS '여자',count(h.surg_name) as '기간통계',count(h.surg_name) * s.surg_price as '기간매출' from customer c join reservation_history h on c.cus_code = h.cus_code join surgery s on h.surg_name = s.surg_name where reserve_date between?and? group by h.surg_name order by 기간매출 desc;");            
+            pst.setString(1,res_date);
+            pst.setString(2,res_hour);
+            pst.executeUpdate();
+            table_load_4();
+            }
+             
+            catch (SQLException e1)
+                    {
+            e1.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error");
+            }
+            
+         }
+      });
+ 
+      
+         
+         
+            
+       
+      
+      
+   }
+
+
+
+public void table_load_3()
+{
+ try
+ {
+pst = con.prepareStatement("select cus_code AS '코드' ,cus_name AS '이름',cus_sex AS '성별',cus_birth AS '생년월일',cus_phone AS '전화번호' from customer");
+rs = pst.executeQuery();
+table_3.setModel(DbUtils.resultSetToTableModel(rs));
+ }
+ catch (SQLException e)
+ {
+ e.printStackTrace();
+ }
+}
+
+public void table_load_1()
+{
+ try
+ {
+pst = con.prepareStatement("select * from ");
+rs = pst.executeQuery();
+table_1.setModel(DbUtils.resultSetToTableModel(rs));
+ }
+ catch (SQLException f)
+ {
+ f.printStackTrace();
+ }
+}
+
+public void table_load_2()
+{
+ try
+ {
+pst = con.prepareStatement("select surg_room,booking,status from booktable");
+rs = pst.executeQuery();
+table_2.setModel(DbUtils.resultSetToTableModel(rs));
+ }
+ catch (SQLException f)
+ {
+ f.printStackTrace();
+ }
+}
+
+
+public void table_load_4()
+{
+ try
+ {
+pst = con.prepareStatement("select * from summary");
+rs = pst.executeQuery();
+table_4.setModel(DbUtils.resultSetToTableModel(rs));
+ }
+ catch (SQLException f)
+ {
+ f.printStackTrace();
+ }
+}
+
+
+
+
+
+public void LoadCode()
+{
+    try
+    {
+    pst = con.prepareStatement("SELECT cus_phone FROM customer order by cus_phone");
+    rs = pst.executeQuery();
+     
+    txtCODE.removeAllItems();
+
+    while (rs.next())
+      {
+    txtCODE.addItem(rs.getString("CUS_PHONE"));
+      }
+    }
+    catch ( Exception e)
+    {
+       e.printStackTrace();
+    }
+}   
+
+
+
+public void LoadCode_1()
+{
+    try
+    {
+    pst = con.prepareStatement("SELECT cus_code FROM customer order by cus_code desc");
+    rs = pst.executeQuery();
+     
+    txtCODE_1.removeAllItems();
+
+    while (rs.next())
+      {
+    txtCODE_1.addItem(rs.getString("CUS_CODE"));
+      }
+    }
+    catch ( Exception e)
+    {
+       e.printStackTrace();
+    }
+}   
+
+
+
+public void LoadCode_2()
+{
+    try
+    {
+    pst = con.prepareStatement("SELECT reserve_date FROM reservation_date");
+    rs = pst.executeQuery();
+     
+    txtdate.removeAllItems();
+
+    while (rs.next())
+      {
+    txtdate.addItem(rs.getString("reserve_date"));
+    txtdate_1.addItem(rs.getString("reserve_date"));
+    txthour_1.addItem(rs.getString("reserve_date"));
+      }
+    }
+    catch ( Exception e)
+    {
+       e.printStackTrace();
+    }
+}   
+
+
+public void LoadCode_3()
+{
+    try
+    {
+    pst = con.prepareStatement("SELECT reserve_hour FROM reservation_hour");
+    rs = pst.executeQuery();
+     
+    txthour.removeAllItems();
+
+    while (rs.next())
+      {
+    txthour.addItem(rs.getString("reserve_hour"));
+    
+      }
+    }
+    catch ( Exception e)
+    {
+       e.printStackTrace();
+    }
+}   
+
+
+public void LoadCode_22()
+{
+    try
+    {
+    pst = con.prepareStatement("SELECT reserve_date FROM reservation_date");
+    rs = pst.executeQuery();
+     
+    combeforedate.removeAllItems();
+    
+
+    while (rs.next())
+      {
+       combeforedate.addItem(rs.getString("reserve_date"));
+      
+       
+      }
+    }
+    catch ( Exception e)
+    {
+       e.printStackTrace();
+    }
+}
+public void LoadCode_33()
+{
+    try
+    {
+    pst = con.prepareStatement("SELECT surg_name FROM surgery");
+    rs = pst.executeQuery();
+     
+    comsurgery.removeAllItems();
+
+    while (rs.next())
+      {
+       comsurgery.addItem(rs.getString("surg_name"));
+      }
+    }
+    catch ( Exception e)
+    {
+       e.printStackTrace();
+    }
+}
+ }
+
+
+
